@@ -359,6 +359,149 @@ export const mockNoticias: Noticia[] = [
     editoria: mockEditorias[6], // Entretenimento
     publicadoEm: new Date(now.getTime() - 2040 * 60000).toISOString(),
     views: 2980
+  },
+  {
+    id: 'n32',
+    titulo: 'Senado aprova novo marco regulatório das startups',
+    subtitulo: 'Medida visa simplificar obrigações tributárias e incentivar investimentos em tecnologia no país.',
+    conteudo: 'O Plenário do Senado aprovou o novo marco regulatório das startups e empresas inovadoras. O projeto prevê facilidades para a captação de recursos, desburocratização de registros e incentivos fiscais para investidores-anjo. A proposta segue para sanção presidencial na próxima semana.',
+    slug: 'senado-aprova-novo-marco-regulatorio-das-startups',
+    imagem: 'https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=800&auto=format&fit=crop&q=80',
+    editoria: mockEditorias[2], // Brasil
+    publicadoEm: new Date(now.getTime() - 25 * 3600000).toISOString(),
+    views: 1920
+  },
+  {
+    id: 'n33',
+    titulo: 'Câmara dos Deputados discute reforma tributária nesta semana',
+    subtitulo: 'Presidente da Câmara pauta debates cruciais sobre simplificação de impostos e alíquotas do novo imposto unificado.',
+    conteudo: 'Os deputados federais retomam nesta semana as sessões de debate sobre a regulamentação da reforma tributária. O foco principal é a definição da cesta básica nacional isenta de impostos e os regimes especiais para setores de serviços e educação.',
+    slug: 'camara-dos-deputados-discute-reforma-tributaria-nesta-semana',
+    imagem: 'https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=800&auto=format&fit=crop&q=80',
+    editoria: mockEditorias[3], // Política
+    publicadoEm: new Date(now.getTime() - 3 * 3600000).toISOString(),
+    views: 2540
+  },
+  {
+    id: 'n34',
+    titulo: 'Eleições 2026: Partidos definem primeiras alianças em Salvador',
+    subtitulo: 'Convenções partidárias iniciam negociações para chapas majoritárias e apoio nas eleições de outubro.',
+    conteudo: 'Com a aproximação das eleições gerais de 2026, os principais partidos políticos na Bahia iniciaram rodadas de conversas para a formação de coligações. Os debates giram em torno de nomes para o governo estadual e chapas proporcionais.',
+    slug: 'eleicoes-2026-partidos-definem-aliancas-salvador',
+    imagem: 'https://images.unsplash.com/photo-1540910419892-4a36d2c3266c?w=800&auto=format&fit=crop&q=80',
+    editoria: mockEditorias[3], // Política
+    publicadoEm: new Date(now.getTime() - 6 * 3600000).toISOString(),
+    views: 3100
+  },
+  {
+    id: 'n35',
+    titulo: 'Prefeito anuncia novas metas de mobilidade para os próximos anos',
+    subtitulo: 'Em coletiva de imprensa, gestor detalha investimentos em faixas exclusivas e ampliação da frota de ônibus elétricos.',
+    conteudo: 'O prefeito de Salvador anunciou um robusto plano de investimentos em mobilidade urbana sustentável. A meta é integrar novas ciclovias e aumentar a frota pública de ônibus 100% elétricos em operação nos principais corredores de tráfego.',
+    slug: 'prefeito-anuncia-metas-de-mobilidade-proximos-anos',
+    imagem: 'https://images.unsplash.com/photo-1494537176433-7a3c4ef2046f?w=800&auto=format&fit=crop&q=80',
+    editoria: mockEditorias[3], // Política
+    publicadoEm: new Date(now.getTime() - 12 * 3600000).toISOString(),
+    views: 1870
+  },
+  {
+    id: 'n36',
+    titulo: 'Bahia receberá investimentos federais para segurança pública',
+    subtitulo: 'Ministério da Justiça garante envio de novos equipamentos e reforço no efetivo de forças integradas no estado.',
+    conteudo: 'Um novo convênio assinado entre o governo estadual e o Ministério da Justiça prevê o repasse de verbas federais destinadas à aquisição de viaturas, armamentos e sistemas de inteligência integrados para o combate à criminalidade na Bahia.',
+    slug: 'bahia-recebera-investimentos-federais-seguranca-publica',
+    imagem: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=800&auto=format&fit=crop&q=80',
+    editoria: mockEditorias[3], // Política
+    publicadoEm: new Date(now.getTime() - 18 * 3600000).toISOString(),
+    views: 2950
+  },
+  {
+    id: 'n37',
+    titulo: 'Inflação oficial sob controle no acumulado do primeiro semestre',
+    subtitulo: 'IPCA registra variação dentro da meta do Banco Central com alívio nos preços de alimentos e energia elétrica.',
+    conteudo: 'O índice de inflação oficial do país apresentou comportamento estável no encerramento do primeiro semestre de 2026. A desaceleração nos preços de itens básicos como feijão, arroz e combustíveis aliviou o orçamento familiar dos brasileiros.',
+    slug: 'inflacao-oficial-sob-controle-primeiro-semestre',
+    imagem: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&auto=format&fit=crop&q=80',
+    editoria: mockEditorias[4], // Economia
+    publicadoEm: new Date(now.getTime() - 4 * 3600000).toISOString(),
+    views: 2180
+  },
+  {
+    id: 'n38',
+    titulo: 'Setor de serviços cresce e puxa geração de empregos na Bahia',
+    subtitulo: 'Dados do Caged apontam abertura de milhares de novos postos formais de trabalho no comércio e turismo baianos.',
+    conteudo: 'O mercado de trabalho baiano registrou saldo positivo de empregos com carteira assinada, impulsionado pela forte retomada das atividades do setor de serviços, hotelaria e gastronomia em diversas regiões turísticas do estado.',
+    slug: 'setor-de-servicos-cresce-geracao-empregos-bahia',
+    imagem: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&auto=format&fit=crop&q=80',
+    editoria: mockEditorias[4], // Economia
+    publicadoEm: new Date(now.getTime() - 8 * 3600000).toISOString(),
+    views: 1760
+  },
+  {
+    id: 'n39',
+    titulo: 'Dólar opera em queda após decisões econômicas no exterior',
+    subtitulo: 'Moeda americana recua frente ao real com entrada de divisas estrangeiras e otimismo nos mercados globais.',
+    conteudo: 'O mercado cambial registrou nova sessão de queda para a moeda norte-americana. Analistas atribuem o recuo do dólar à manutenção das taxas de juros americanas e à boa receptividade de investidores estrangeiros a títulos do tesouro nacional.',
+    slug: 'dolar-opera-em-queda-decisoes-economicas-exterior',
+    imagem: 'https://images.unsplash.com/photo-1502920514313-52581002a659?w=800&auto=format&fit=crop&q=80',
+    editoria: mockEditorias[4], // Economia
+    publicadoEm: new Date(now.getTime() - 14 * 3600000).toISOString(),
+    views: 2310
+  },
+  {
+    id: 'n40',
+    titulo: 'Bahia vence e assume liderança isolada de grupo na Copa do Nordeste',
+    subtitulo: 'Tricolor bate adversário fora de casa com grande atuação coletiva e garante classificação antecipada.',
+    conteudo: 'O Esporte Clube Bahia conquistou uma importante vitória em partida válida pela fase de grupos do torneio regional. Jogando com determinação, o elenco assegurou os três pontos que colocam o time na ponta da tabela de classificação.',
+    slug: 'bahia-vence-lideranca-copa-do-nordeste',
+    imagem: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=800&auto=format&fit=crop&q=80',
+    editoria: mockEditorias[5], // Esportes
+    publicadoEm: new Date(now.getTime() - 2 * 3600000).toISOString(),
+    views: 4890
+  },
+  {
+    id: 'n41',
+    titulo: 'Vitória empata no Barradão e técnico cobra mais foco da equipe',
+    subtitulo: 'Leão pressiona durante todo o jogo mas peca nas finalizações diante de sua torcida em Salvador.',
+    conteudo: 'O Esporte Clube Vitória não passou de um empate em casa em duelo muito disputado. Na entrevista coletiva, o comandante rubro-negro destacou o volume de jogo mas pediu maior capricho ofensivo nos próximos confrontos do campeonato.',
+    slug: 'vitoria-empata-barradao-tecnico-cobra-foco',
+    imagem: 'https://images.unsplash.com/photo-1577223625856-758c127df1b1?w=800&auto=format&fit=crop&q=80',
+    editoria: mockEditorias[5], // Esportes
+    publicadoEm: new Date(now.getTime() - 5 * 3600000).toISOString(),
+    views: 3120
+  },
+  {
+    id: 'n42',
+    titulo: 'Teatro Castro Alves anuncia reabertura de sala principal após reforma',
+    subtitulo: 'Complexo cultural em Salvador prepara programação especial com shows e espetáculos gratuitos para marcar o retorno.',
+    conteudo: 'O tradicional Teatro Castro Alves (TCA) divulgou a data de reabertura da sua sala principal de espetáculos. Após meses de restauração e modernização técnica, o espaço volta a receber grandes peças teatrais e concertos musicais.',
+    slug: 'teatro-castro-alves-reabertura-sala-principal',
+    imagem: 'https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?w=800&auto=format&fit=crop&q=80',
+    editoria: mockEditorias[6], // Entretenimento
+    publicadoEm: new Date(now.getTime() - 9 * 3600000).toISOString(),
+    views: 1450
+  },
+  {
+    id: 'n43',
+    titulo: 'Artistas baianos concorrem a prêmio internacional de música latino-americana',
+    subtitulo: 'Indicações destacam a diversidade e a força da produção artística baiana no cenário cultural mundial.',
+    conteudo: 'Vários cantores e compositores baianos foram indicados a categorias de destaque no prestigiado festival de música latina. A premiação celebra a originalidade das canções e álbuns produzidos na Bahia ao longo do último ano.',
+    slug: 'artistas-baianos-concorrem-premio-musica-latina',
+    imagem: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&auto=format&fit=crop&q=80',
+    editoria: mockEditorias[6], // Entretenimento
+    publicadoEm: new Date(now.getTime() - 15 * 3600000).toISOString(),
+    views: 2010
+  },
+  {
+    id: 'n44',
+    titulo: 'São João da Bahia: Confira a programação oficial das praças históricas',
+    subtitulo: 'Pelourinho e Paripe terão grandes palcos com atrações de forró tradicional do dia 20 a 25 de junho.',
+    conteudo: 'O governo do estado anunciou o calendário completo de shows gratuitos para os festejos juninos em Salvador. O centro histórico receberá trios tradicionais de sanfoneiros, além de nomes consagrados do forró nacional.',
+    slug: 'sao-joao-bahia-programacao-oficial-pracas-historicas',
+    imagem: 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=800&auto=format&fit=crop&q=80',
+    editoria: mockEditorias[6], // Entretenimento
+    publicadoEm: new Date(now.getTime() - 21 * 3600000).toISOString(),
+    views: 3100
   }
 ];
 

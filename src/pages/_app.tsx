@@ -24,13 +24,13 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta property="og:locale" content="pt_BR" key="og:locale" />
         <meta property="og:title" content="Sociedade ON | O Maior Portal de Notícias e Rádio da Bahia" key="og:title" />
         <meta property="og:description" content="Acompanhe as últimas notícias de Salvador, Bahia e do Brasil. Ouça a Rádio Sociedade 102.5 FM ao vivo." key="og:description" />
-        <meta property="og:image" content="https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=1200&auto=format&fit=crop&q=80" key="og:image" />
+        <meta property="og:image" content="/placeholder.png" key="og:image" />
 
         {/* Twitter Fallback */}
         <meta name="twitter:card" content="summary_large_image" key="twitter:card" />
         <meta name="twitter:title" content="Sociedade ON | O Maior Portal de Notícias e Rádio da Bahia" key="twitter:title" />
         <meta name="twitter:description" content="Acompanhe as últimas notícias de Salvador, Bahia e do Brasil. Ouça a Rádio Sociedade 102.5 FM ao vivo." key="twitter:description" />
-        <meta name="twitter:image" content="https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=1200&auto=format&fit=crop&q=80" key="twitter:image" />
+        <meta name="twitter:image" content="/placeholder.png" key="twitter:image" />
       </Head>
       <div className="flex flex-col min-h-screen bg-brand-light">
         {/* Header (TopBar + Logo + Nav) */}
