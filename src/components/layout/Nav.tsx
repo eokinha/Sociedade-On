@@ -57,6 +57,16 @@ export const Nav: React.FC<NavProps> = ({ onMenuToggle }) => {
     setSearchQuery('');
   };
 
+  const handleLogoClick = (e: React.MouseEvent) => {
+    if (router.pathname === '/') {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+    }
+  };
+
   const menuItems = [
     { nome: 'Últimas Notícias', path: '/ultimas-noticias' },
     { nome: 'Salvador', path: '/salvador', hasDropdown: true },
@@ -93,7 +103,7 @@ export const Nav: React.FC<NavProps> = ({ onMenuToggle }) => {
             </div>
             {isScrolled && (
               <div className="hidden md:flex flex-1 justify-center px-4 animate-fade-in">
-                <Link href="/" className="flex items-center select-none shrink-0">
+                <Link href="/" className="flex items-center select-none shrink-0" onClick={handleLogoClick}>
                   <Image
                     src="/logo-sociedade.png"
                     alt="Sociedade ON"
@@ -139,7 +149,7 @@ export const Nav: React.FC<NavProps> = ({ onMenuToggle }) => {
 
             {/* Centered Mobile Logo */}
             <div className="md:hidden flex items-center justify-center">
-              <Link href="/" className="flex items-center select-none">
+              <Link href="/" className="flex items-center select-none" onClick={handleLogoClick}>
                 <Image
                   src="/logo-sociedade.png"
                   alt="Sociedade ON"
