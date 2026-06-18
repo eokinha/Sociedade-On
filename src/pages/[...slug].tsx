@@ -78,7 +78,7 @@ export default function DynamicPage({
               ))}
             </div>
           ) : (
-            <div className="bg-white rounded-2xl p-12 text-center border border-gray-100 shadow-xs">
+            <div className="bg-white p-12 text-center border border-gray-100 shadow-xs">
               <p className="text-brand-gray font-bold">Nenhuma notícia publicada nesta editoria ainda.</p>
               <Link href="/" className="mt-4 inline-block text-xs font-black text-brand-blue hover:text-brand-yellow uppercase tracking-wider">
                 Voltar para a Home
@@ -154,7 +154,7 @@ export default function DynamicPage({
               </p>
 
               {/* Social engagement details */}
-              <div className="flex flex-wrap items-center gap-y-2 gap-x-6 text-[11px] font-bold text-brand-gray border-t border-b border-gray-100 py-3 uppercase tracking-wider">
+              <div className="flex flex-wrap items-center gap-y-2 gap-x-6 text-xs font-bold text-brand-gray border-t border-b border-gray-100 py-3 uppercase tracking-wider">
                 <span className="flex items-center gap-1">
                   <Calendar className="w-3.5 h-3.5" />
                   <span>Publicado {new Date(noticia.publicadoEm).toLocaleDateString('pt-BR')}</span>
@@ -172,13 +172,13 @@ export default function DynamicPage({
 
             {/* Listen report block */}
             {noticia.audioUrl && (
-              <div className="bg-brand-blue/5 border border-brand-blue/10 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="bg-brand-blue/5 border border-brand-blue/10 p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-brand-blue text-white flex items-center justify-center shrink-0">
                     <Play className="w-4 h-4 ml-0.5 fill-current" />
                   </div>
                   <div>
-                    <span className="text-[10px] uppercase text-brand-gray font-bold tracking-widest block">REPORTAGEM EM ÁUDIO</span>
+                    <span className="text-2xs uppercase text-brand-gray font-bold tracking-widest block">REPORTAGEM EM ÁUDIO</span>
                     <p className="font-extrabold text-xs sm:text-sm text-brand-blue">
                       Ouça a matéria completa narrada pela redação.
                     </p>
@@ -202,7 +202,7 @@ export default function DynamicPage({
 
             {/* Main Visual Image */}
             {imageUrl && (
-              <div className="aspect-[21/10] w-full relative rounded-2xl overflow-hidden shadow-xs bg-gray-50">
+              <div className="aspect-[21/10] w-full relative overflow-hidden shadow-xs bg-gray-50">
                 <img
                   src={imageUrl}
                   alt={noticia.titulo}
@@ -259,7 +259,7 @@ export default function DynamicPage({
                         className="group flex gap-3 items-start text-left hover:opacity-95 transition-opacity"
                       >
                         {latestImageUrl && (
-                          <div className="w-16 h-12 relative rounded-md overflow-hidden shrink-0 bg-gray-50 border border-gray-100">
+                          <div className="w-16 h-12 relative overflow-hidden shrink-0 bg-gray-50 border border-gray-100">
                             <img
                               src={latestImageUrl}
                               alt={item.titulo}
@@ -268,14 +268,14 @@ export default function DynamicPage({
                           </div>
                         )}
                         <div className="flex-1 min-w-0">
-                          <h4 className="font-bold text-[12px] text-brand-blue group-hover:text-brand-yellow transition-colors leading-tight line-clamp-2">
+                          <h4 className="font-bold text-sm text-brand-blue group-hover:text-brand-yellow transition-colors leading-tight line-clamp-2">
                             {item.titulo}
                           </h4>
                           <div className="flex items-center gap-1.5 mt-1">
-                            <span className="text-[8px] font-black text-brand-yellow uppercase tracking-wider">
+                            <span className="text-2xs font-black text-brand-yellow uppercase tracking-wider">
                               {item.editoria.nome}
                             </span>
-                            <span className="text-[8px] font-bold text-brand-gray uppercase">
+                            <span className="text-2xs font-bold text-brand-gray">
                               <TempoPublicacao date={item.publicadoEm} />
                             </span>
                           </div>
@@ -300,16 +300,16 @@ export default function DynamicPage({
                     <Link
                       key={item.id}
                       href={`/${item.editoria.slug}/${item.slug}`}
-                      className="group flex gap-3 items-start text-left"
+                      className="group flex gap-3 items-center text-left"
                     >
-                      <span className="w-6 h-6 bg-brand-blue text-white text-[10px] font-black rounded-xs flex items-center justify-center shrink-0 mt-0.5 shadow-sm font-mono">
+                      <span className="w-6 h-6 bg-brand-blue text-white text-2xs font-black rounded-xs flex items-center justify-center shrink-0 shadow-sm font-mono">
                         {index + 1}
                       </span>
                       <div className="flex flex-col gap-0.5 min-w-0">
-                        <h4 className="font-extrabold text-[12px] text-brand-blue group-hover:text-brand-yellow transition-colors leading-snug line-clamp-2">
+                        <h4 className="font-extrabold text-sm text-brand-blue group-hover:text-brand-yellow transition-colors leading-snug line-clamp-2">
                           {item.titulo}
                         </h4>
-                        <span className="text-[9px] text-brand-gray font-bold uppercase tracking-wider mt-0.5">
+                        <span className="text-2xs text-brand-gray font-bold uppercase tracking-wider mt-0.5">
                           {item.editoria.nome}
                         </span>
                       </div>

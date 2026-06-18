@@ -10,7 +10,7 @@ const config: Config = {
       colors: {
         brand: {
           blue: '#0D1B4B',
-          yellow: '#F5A800',
+          yellow: '#E8001C',
           red: '#E8001C',
           white: '#FFFFFF',
           light: '#F4F4F4',

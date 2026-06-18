@@ -9,7 +9,7 @@ interface TagEditoriaProps {
 export const TagEditoria: React.FC<TagEditoriaProps> = ({ editoria, className = '' }) => {
   return (
     <span
-      className={`inline-block text-[10px] md:text-xs font-extrabold tracking-wider uppercase px-2.5 py-0.5 rounded text-white ${className}`}
+      className={`inline-block text-3xs font-extrabold tracking-wide uppercase px-1.5 py-0.5 rounded-sm text-white shrink-0 ${className}`}
       style={{ backgroundColor: editoria.cor || '#0D1B4B' }}
     >
       {editoria.nome}

@@ -3,26 +3,41 @@ import { GetServerSideProps } from 'next';
 import { getItems } from '@/lib/directus';
 import { Noticia } from '@/types/noticia';
 import { Editoria } from '@/types/editoria';
-import { Podcast } from '@/types/podcast';
+import { Programa } from '@/lib/directus';
 import HeroDestaque from '@/components/pages/homepage/HeroDestaque';
 import AgoraNaSociedade from '@/components/pages/homepage/AgoraNaSociedade';
+import UltimasNoticias from '@/components/pages/homepage/UltimasNoticias';
+import EditoriaSection from '@/components/pages/homepage/EditoriaSection';
 import CortesRadio from '@/components/pages/homepage/CortesRadio';
 import MaisLidas from '@/components/pages/homepage/MaisLidas';
-import Destaques from '@/components/pages/homepage/Destaques';
-import SociedadePlay from '@/components/pages/homepage/SociedadePlay';
-import PodcastsDestaque from '@/components/pages/homepage/PodcastsDestaque';
 import SigaSociedade from '@/components/pages/homepage/SigaSociedade';
+import Programacao from '@/components/pages/homepage/Programacao';
+import BannerAd from '@/components/common/widgets/BannerAd';
+import WidgetClima from '@/components/common/widgets/WidgetClima';
 
 interface HomeProps {
   noticias: Noticia[];
   editorias: Editoria[];
-  podcasts: Podcast[];
+  programas: Programa[];
   currentUrl: string;
 }
 
-export default function Home({ noticias, editorias, podcasts, currentUrl }: HomeProps) {
+export default function Home({ noticias, editorias, programas, currentUrl }: HomeProps) {
   const highlightNews = noticias[0];
   const otherNews = noticias.slice(1);
+
+  // Group news by editoria slug
+  const noticiasPorEditoria: Record<string, Noticia[]> = {};
+  noticias.forEach((n) => {
+    const slug = n.editoria.slug;
+    if (!noticiasPorEditoria[slug]) noticiasPorEditoria[slug] = [];
+    noticiasPorEditoria[slug].push(n);
+  });
+
+  // Editorias to display as sections (only those with content)
+  const editoriasComConteudo = editorias.filter(
+    (e) => noticiasPorEditoria[e.slug] && noticiasPorEditoria[e.slug].length > 0
+  );
 
   return (
     <>
@@ -37,7 +52,7 @@ export default function Home({ noticias, editorias, podcasts, currentUrl }: Home
       </Head>
 
       <div className="flex flex-col gap-6">
-        {/* Grid de 2 colunas no hero (Destaque principal + Agora na Sociedade) */}
+        {/* 1. Hero: Destaque principal + Agora na Sociedade */}
         {highlightNews && (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
             <div className="lg:col-span-2 flex flex-col">
@@ -49,35 +64,51 @@ export default function Home({ noticias, editorias, podcasts, currentUrl }: Home
           </div>
         )}
 
-        {/* Seção "Cortes da Rádio" e "Mais Lidas" lado a lado */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start border-t border-b border-gray-100 py-3.5 my-2">
-          <div className="lg:col-span-8">
-            <CortesRadio noticias={noticias} />
+        {/* 2. Banner publicitário horizontal */}
+        <BannerAd formato="horizontal-lg" />
+
+        {/* 3. Grid: Main Content (8/12) + Sidebar (4/12) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          {/* Main content */}
+          <div className="lg:col-span-8 flex flex-col gap-8">
+            <UltimasNoticias noticias={otherNews} />
+
+            {/* Banner publicitário horizontal */}
+            <BannerAd formato="horizontal-lg" className="my-2" />
+
+            {/* Seções de Editorias — cada editoria como seção comercial */}
+            <div className="flex flex-col gap-8">
+              {editoriasComConteudo.map((editoria, idx) => (
+                <div key={editoria.id} className="flex flex-col gap-6">
+                  <EditoriaSection
+                    editoria={editoria}
+                    noticias={noticiasPorEditoria[editoria.slug]}
+                  />
+                  {/* Banner between some editoria sections */}
+                  {idx === 2 && <BannerAd formato="horizontal-lg" className="mt-4" />}
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="lg:col-span-4 lg:border-l lg:border-gray-100 lg:pl-8 self-stretch">
+
+          {/* Sidebar */}
+          <aside className="lg:col-span-4 flex flex-col gap-6 lg:border-l lg:border-gray-100 lg:pl-8">
             <MaisLidas noticias={noticias} />
-          </div>
+            <BannerAd formato="retangulo" />
+            <WidgetClima variant="sidebar" />
+            <BannerAd formato="half-page" />
+            <SigaSociedade />
+          </aside>
         </div>
 
-        {/* Seção Destaques, Sociedade Play e Podcasts + Siga Sociedade lado a lado no desktop */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch border-b border-gray-100 pb-6 my-2">
-          <div className="lg:col-span-6 flex flex-col">
-            <Destaques noticias={otherNews} tituloSecao="Destaques" />
-          </div>
-          <div className="lg:col-span-3 flex flex-col">
-            <SociedadePlay />
-          </div>
-          {/* Coluna direita: Podcasts + Siga Sociedade empilhados, preenchendo a altura total */}
-          <div className="lg:col-span-3 flex flex-col gap-0">
-            <div className="flex-1 flex flex-col">
-              <PodcastsDestaque podcasts={podcasts} />
-            </div>
-            <div className="flex-shrink-0">
-              <SigaSociedade />
-            </div>
-          </div>
-        </div>
+        {/* 4. Cortes da Rádio */}
+        <CortesRadio noticias={noticias} />
 
+        {/* 5. Banner publicitário horizontal */}
+        <BannerAd formato="horizontal-lg" className="my-2" />
+
+        {/* 6. Programação & Apresentadores */}
+        <Programacao programas={programas} />
       </div>
     </>
   );
@@ -88,18 +119,19 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const protocol = context.req.headers['x-forwarded-proto'] || 'https';
   const currentUrl = `${protocol}://${host}${context.resolvedUrl}`;
 
-  const [noticias, editorias, podcasts] = await Promise.all([
+  const [noticias, editorias, programas] = await Promise.all([
     getItems<Noticia>('noticias'),
     getItems<Editoria>('editorias'),
-    getItems<Podcast>('podcasts'),
+    getItems<Programa>('programacao'),
   ]);
 
   return {
     props: {
       noticias,
       editorias,
-      podcasts,
+      programas,
       currentUrl,
     },
   };
 };
+

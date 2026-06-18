@@ -38,7 +38,7 @@ export const Destaques: React.FC<DestaquesProps> = ({ noticias, tituloSecao = 'D
       conteudo: '',
       slug: 'comercio-baiano-deve-crescer-cinco-porcent',
       imagem: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=400&auto=format&fit=crop&q=80',
-      editoria: { id: 'd5', nome: 'ECONOMIA', slug: 'economia', cor: '#F5A800' },
+      editoria: { id: 'd5', nome: 'ECONOMIA', slug: 'economia', cor: '#3B82F6' },
       publicadoEm: new Date(Date.now() - 1000 * 60 * 120).toISOString() // há 2 horas
     },
     {

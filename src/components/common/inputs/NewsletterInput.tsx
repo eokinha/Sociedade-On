@@ -27,11 +27,11 @@ export const NewsletterInput: React.FC = () => {
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Digite seu e-mail"
             required
-            className="flex-1 bg-white/10 text-white placeholder-gray-400 focus:placeholder-transparent border border-white/20 focus:border-brand-yellow px-4 py-2.5 rounded-lg text-sm outline-none transition-all"
+            className="flex-1 bg-white/10 text-white placeholder-gray-400 focus:placeholder-transparent border border-white/20 focus:border-brand-yellow px-4 py-2.5 text-sm outline-none transition-all"
           />
           <button
             type="submit"
-            className="bg-brand-yellow hover:bg-[#e09a00] text-brand-blue font-bold px-5 py-2.5 rounded-lg text-sm transition-all shadow-md shrink-0"
+            className="bg-brand-yellow hover:bg-[#C0001A] text-white font-bold px-5 py-2.5 text-sm transition-all shadow-md shrink-0"
           >
             Inscrever
           </button>

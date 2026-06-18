@@ -25,7 +25,7 @@ export const AgoraNaSociedade: React.FC = () => {
   };
 
   return (
-    <div className="bg-brand-blue text-white rounded-2xl overflow-hidden shadow-md flex flex-col h-full border border-white/5 select-none">
+    <div className="bg-brand-blue text-white overflow-hidden shadow-md flex flex-col h-full border border-white/5 select-none">
 
       {/* Top Header Row of the Card */}
       <div className="bg-[#050B1E] px-5 py-3.5 border-b border-white/5 flex justify-between items-center shrink-0">
@@ -33,7 +33,7 @@ export const AgoraNaSociedade: React.FC = () => {
           AGORA NA SOCIEDADE
         </h3>
         {/* Red pill badge with white text */}
-        <span className="flex items-center bg-brand-red text-white text-[9px] font-black uppercase px-2 py-0.5 rounded tracking-wide shrink-0">
+        <span className="flex items-center bg-brand-red text-white text-2xs font-black uppercase px-2 py-0.5 rounded tracking-wide shrink-0">
           AO VIVO
         </span>
       </div>
@@ -70,7 +70,7 @@ export const AgoraNaSociedade: React.FC = () => {
         <div className="flex flex-col gap-2.5 pt-1.5">
           <button
             onClick={handleLiveToggle}
-            className="w-full bg-brand-yellow hover:bg-[#e09a00] text-brand-blue font-black py-2.5 px-4 rounded-lg flex items-center justify-center gap-2 transition-colors duration-200 active:scale-95 cursor-pointer text-xs uppercase tracking-wide"
+            className="w-full bg-brand-yellow hover:bg-[#C0001A] text-white font-black py-2.5 px-4 flex items-center justify-center gap-2 transition-colors duration-200 active:scale-95 cursor-pointer text-xs uppercase tracking-wide"
           >
             {isCurrentlyPlaying ? (
               <Pause className="w-3.5 h-3.5 fill-current" />

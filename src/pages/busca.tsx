@@ -56,7 +56,7 @@ export default function BuscaPage({ query, noticias = [], currentUrl }: BuscaPag
         </div>
 
         {/* Inline Search Bar on Search Page */}
-        <div className="bg-white rounded-2xl p-5 border border-gray-100 shadow-xs mb-10">
+        <div className="bg-white p-5 border border-gray-100 shadow-xs mb-10">
           <form onSubmit={handleSearchSubmit} className="flex gap-2">
             <div className="relative flex-1">
               <input
@@ -64,13 +64,13 @@ export default function BuscaPage({ query, noticias = [], currentUrl }: BuscaPag
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 placeholder="Pesquisar novas notícias..."
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 focus:border-brand-yellow rounded-xl text-sm text-brand-blue placeholder-gray-400 outline-none transition-colors"
+                className="w-full pl-10 pr-4 py-3 border border-gray-300 focus:border-brand-yellow text-sm text-brand-blue placeholder-gray-400 outline-none transition-colors"
               />
               <Search className="w-4 h-4 text-gray-400 absolute left-4.5 top-1/2 -translate-y-1/2" />
             </div>
             <button
               type="submit"
-              className="bg-brand-blue hover:bg-[#070e28] text-white px-6 py-3 rounded-xl font-black text-xs uppercase tracking-wider transition-colors shrink-0 cursor-pointer"
+              className="bg-brand-blue hover:bg-[#070e28] text-white px-6 py-3 font-black text-xs uppercase tracking-wider transition-colors shrink-0 cursor-pointer"
             >
               Buscar
             </button>
@@ -90,7 +90,7 @@ export default function BuscaPage({ query, noticias = [], currentUrl }: BuscaPag
             </div>
           </div>
         ) : (
-          <div className="bg-white rounded-2xl p-16 text-center border border-gray-100 shadow-xs flex flex-col items-center gap-4">
+          <div className="bg-white p-16 text-center border border-gray-100 shadow-xs flex flex-col items-center gap-4">
             <div className="w-12 h-12 rounded-full bg-brand-yellow/10 flex items-center justify-center text-brand-yellow mb-2">
               <Search className="w-6 h-6" />
             </div>
@@ -102,7 +102,7 @@ export default function BuscaPage({ query, noticias = [], currentUrl }: BuscaPag
             </p>
             <Link
               href="/"
-              className="mt-2 bg-brand-blue hover:bg-[#070e28] text-white px-5 py-3 rounded-lg font-black text-[10px] uppercase tracking-wider transition-colors shadow-sm cursor-pointer"
+              className="mt-2 bg-brand-blue hover:bg-[#070e28] text-white px-5 py-3 font-black text-[10px] uppercase tracking-wider transition-colors shadow-sm cursor-pointer"
             >
               Voltar para a Home
             </Link>

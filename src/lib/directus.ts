@@ -7,7 +7,7 @@ const DIRECTUS_URL = process.env.NEXT_PUBLIC_DIRECTUS_URL || '';
 // Mock Data
 export const mockEditorias: Editoria[] = [
   { id: '1', nome: 'Salvador', slug: 'salvador', cor: '#0D1B4B' },
-  { id: '2', nome: 'Bahia', slug: 'bahia', cor: '#F5A800' },
+  { id: '2', nome: 'Bahia', slug: 'bahia', cor: '#1D6FBF' },
   { id: '3', nome: 'Brasil', slug: 'brasil', cor: '#E8001C' },
   { id: '4', nome: 'Política', slug: 'politica', cor: '#10B981' },
   { id: '5', nome: 'Economia', slug: 'economia', cor: '#3B82F6' },
@@ -16,145 +16,417 @@ export const mockEditorias: Editoria[] = [
 ];
 
 const now = new Date();
-
 export const mockNoticias: Noticia[] = [
   {
     id: 'n1',
-    titulo: 'Modernização do Pelourinho atrai recorde de turistas neste São João e impulsiona comércio local',
-    subtitulo: 'Casarões históricos revitalizados e programação cultural descentralizada geram ocupação hoteleira máxima na capital baiana.',
-    conteudo: `O Pelourinho, coração histórico de Salvador, vive um de seus melhores momentos em termos de visitação e movimentação econômica neste período junino. Com a conclusão das obras de revitalização das fachadas históricas e a instalação de uma nova iluminação cênica em LED, o circuito cultural atraiu cerca de 250 mil turistas apenas no primeiro final de semana de festividades.
-
-Segundo a Associação Brasileira da Indústria de Hotéis na Bahia (ABIH-BA), a ocupação média dos hotéis no Centro Histórico atingiu a marca histórica de 98.7%. O comércio de artesanatos, restaurantes de comida típica e os tradicionais ensaios de blocos afro registraram aumento no faturamento estimado de 34% em relação ao mesmo período do ano anterior.
-
-O prefeito de Salvador destacou que as intervenções urbanísticas foram pensadas para preservar o patrimônio material e ao mesmo tempo dar maior segurança e conforto aos pedestres. "O turismo qualificado retorna quando encontra uma cidade que cuida do seu morador primeiro. O novo Pelourinho é um orgulho para os soteropolitanos e um cartão postal que reluz para o mundo", declarou durante a abertura oficial do festival de quadrilhas juninas.
-
-Além dos palcos principais, os largos do Pelourinho ganharam decorações interativas inspiradas no cangaço e na literatura de cordel, proporcionando espaços instagramáveis que amplificam a divulgação da cultura baiana nas redes sociais. A segurança também foi reforçada com o monitoramento por câmeras de reconhecimento facial integradas ao centro de operações da Guarda Municipal, garantindo uma festa pacífica e familiar.`,
-    slug: 'modernizacao-do-pelourinho-atrai-recorde-de-turistas-neste-sao-joao',
-    imagem: 'https://images.unsplash.com/photo-1599940824399-b87987ceb72a?w=1200&auto=format&fit=crop&q=80',
+    titulo: 'Jogo do Brasil terá festa em bairros de Salvador',
+    subtitulo: 'Prefeitura de Salvador monta estruturas com transmissão ao vivo nos bairros para o jogo da seleção feminina.',
+    conteudo: 'A Prefeitura de Salvador preparou festas e transmissões especiais em diversos bairros da capital baiana para o próximo jogo da Seleção Brasileira Feminina na Copa do Mundo. Telões gigantes e atrações musicais farão parte das estruturas nos bairros periféricos para garantir a diversão dos torcedores locais de forma gratuita.',
+    slug: 'jogo-do-brasil-tera-festa-em-bairros-de-salvador',
+    imagem: 'https://sociedadeonline.com/wp-content/smush-avif/2026/06/Foto-para-materia-2026-06-18T100339.148-320x240.png.avif',
     editoria: mockEditorias[0], // Salvador
-    publicadoEm: new Date(now.getTime() - 25 * 60000).toISOString(), // 25 min ago
+    publicadoEm: new Date(now.getTime() - 15 * 60000).toISOString(),
     audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
-    views: 1245
+    views: 1540
   },
   {
     id: 'n2',
-    titulo: 'Governo da Bahia anuncia novos incentivos fiscais para implantação de polo tecnológico de energia solar',
-    subtitulo: 'Região norte do estado receberá consórcio internacional com investimento previsto de R$ 1.2 bilhão e geração de 3 mil empregos diretos.',
-    conteudo: `O Governo do Estado da Bahia oficializou nesta manhã um pacote bilionário de incentivos fiscais direcionado à produção de painéis fotovoltaicos e baterias de lítio no semiárido baiano. A iniciativa visa consolidar o estado como líder absoluto na transição de matriz energética limpa no Nordeste.
-
-O acordo foi assinado junto a um consórcio liderado por investidores alemães e chineses na governadoria, em Salvador. O novo polo industrial será instalado na microrregião de Juazeiro e Sobradinho, locais que apresentam os maiores índices de irradiação solar do país ao longo de todo o ano.
-
-Além do diferimento do ICMS sobre máquinas importadas, o plano estadual inclui parcerias com o Senai e universidades estaduais para a capacitação profissional gratuita de jovens da região, criando mão de obra qualificada e reduzindo o desemprego local. A previsão de início das obras civis é para o terceiro trimestre deste ano, com início de operações comerciais agendado para meados do próximo ano.`,
-    slug: 'governo-da-bahia-anuncia-novos-incentivos-fiscais-polo-solar',
-    imagem: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&auto=format&fit=crop&q=80',
+    titulo: 'Carreta em chamas interdita trecho da BR-116',
+    subtitulo: 'Acidente com veículo de carga provoca incêndio de grandes proporções e bloqueio total da rodovia na Bahia.',
+    conteudo: 'Uma carreta pegou fogo na manhã desta quinta-feira em um trecho movimentado da rodovia federal BR-116, na Bahia. O fogo espalhou-se rapidamente e a Polícia Rodoviária Federal (PRF) precisou interditar completamente a via em ambos os sentidos para o trabalho do Corpo de Bombeiros. O incidente causou grande engarrafamento e desvios nas estradas locais.',
+    slug: 'carreta-em-chamas-interdita-trecho-da-br-116',
+    imagem: 'https://sociedadeonline.com/wp-content/smush-avif/2026/06/Foto-para-materia-2026-06-18T085152.663-320x240.png.avif',
     editoria: mockEditorias[1], // Bahia
-    publicadoEm: new Date(now.getTime() - 90 * 60000).toISOString(), // 1.5h ago
-    audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
-    views: 890
+    publicadoEm: new Date(now.getTime() - 30 * 60000).toISOString(),
+    views: 3420
   },
   {
     id: 'n3',
-    titulo: 'Inflação oficial fecha o mês em queda impulsionada por baixa nos preços dos combustíveis e alimentos',
-    subtitulo: 'Índice de Preços ao Consumidor Amplo (IPCA) registra recuo de 0,15% e traz alívio para o orçamento das famílias.',
-    conteudo: `A inflação oficial do país apresentou deflação no último mês, impulsionada principalmente pela queda na cotação internacional do petróleo e pela colheita recorde da safra de grãos, que aumentou a oferta de alimentos nos supermercados.
-
-Segundo os dados divulgados pelo Instituto de Geografia e Estatística, o grupo de Transportes teve a maior retração, refletindo os reajustes nas refinarias. No setor alimentício, hortaliças e carnes de frango puxaram a média para baixo, facilitando o acesso da população de baixa renda à cesta básica.
-
-Analistas de mercado apontam que esse cenário abre margem para que o Banco Central acelere o ritmo de cortes na taxa básica de juros (Selic) na próxima reunião do Copom, o que pode baratear o crédito e reaquecer o financiamento imobiliário e a venda de bens de consumo duráveis nos próximos meses.`,
-    slug: 'inflacao-oficial-fecha-o-mes-em-queda-combustiveis-alimentos',
-    imagem: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&auto=format&fit=crop&q=80',
-    editoria: mockEditorias[4], // Economia
-    publicadoEm: new Date(now.getTime() - 180 * 60000).toISOString(), // 3h ago
-    audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3',
-    views: 2356
-  },
-  {
-    id: 'n4',
-    titulo: 'Senado aprova texto base de reforma tributária que unifica impostos sobre consumo',
-    subtitulo: 'Nova emenda constitucional simplifica o sistema tributário brasileiro por meio da criação do IVA Dual, prevendo transição gradual de dez anos.',
-    conteudo: `Em uma sessão histórica com votação estendida até a madrugada, o Senado Federal aprovou por ampla maioria o texto-base da PEC da Reforma Tributária. O projeto agora retorna à Câmara dos Deputados devido às alterações pontuais feitas pelos senadores em relação a isenções de produtos da cesta básica e regimes especiais de tributação.
-
-A mudança principal reside na simplificação de cinco tributos federais, estaduais e municipais (PIS, Cofins, IPI, ICMS e ISS) em um Imposto sobre Valor Agregado (IVA) Dual, composto pela Contribuição sobre Bens e Serviços (CBS) federal e o Imposto sobre Bens e Serviços (IBS) subnacional.
-
-Governadores de estados do Nordeste celebraram a manutenção do Fundo de Desenvolvimento Regional, criado para compensar a perda de arrecadação de estados menos industrializados e incentivar investimentos em infraestrutura e inovação. A alíquota padrão estimada do novo imposto será definida apenas por lei complementar posterior.`,
-    slug: 'senado-aprova-texto-base-de-reforma-tributaria-iva-dual',
-    imagem: 'https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=800&auto=format&fit=crop&q=80',
-    editoria: mockEditorias[3], // Política
-    publicadoEm: new Date(now.getTime() - 300 * 60000).toISOString(), // 5h ago
+    titulo: 'Coletores salvam cachorro momentos antes de compactação de lixo',
+    subtitulo: 'Garis ouvem gemidos e resgatam animal que estava preso dentro de saco de lixo descartado na calçada.',
+    conteudo: 'Um ato heroico e emocionante marcou a manhã dos coletores de lixo na Bahia. Durante o recolhimento rotineiro, os garis ouviram barulhos abafados de latidos vindos de um saco de lixo preto bem amarrado. Ao abrirem o saco, encontraram um cachorrinho bastante assustado. O resgate aconteceu segundos antes de a carga ser compactada pelo caminhão coletor.',
+    slug: 'coletores-salvam-cachorro-momentos-antes-de-compactacao-de-lixo',
+    imagem: 'https://sociedadeonline.com/wp-content/smush-avif/2026/06/WhatsApp-Image-2026-06-18-at-10.02.18-560x420.jpeg.avif',
+    editoria: mockEditorias[0], // Salvador
+    publicadoEm: new Date(now.getTime() - 45 * 60000).toISOString(),
+    audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
     views: 4120
   },
   {
+    id: 'n4',
+    titulo: 'Mais de mil celulares serão devolvidos aos donos nesta quinta (18) na Bahia',
+    subtitulo: 'Secretaria de Segurança Pública realiza mutirão de devolução de aparelhos recuperados de furtos e roubos.',
+    conteudo: 'A Secretaria de Segurança Pública da Bahia realiza nesta quinta-feira um grande mutirão para a devolução de mais de mil telefones celulares recuperados em operações recentes da Polícia Civil. As pessoas cadastradas que tiveram seus aparelhos subtraídos foram previamente notificadas para comparecer aos postos de atendimento portando documento pessoal e comprovante de propriedade.',
+    slug: 'mais-de-mil-celulares-serao-devolvidos-aos-donos-nesta-quinta-18-na-bahia',
+    imagem: 'https://sociedadeonline.com/wp-content/smush-avif/2026/06/Foto-para-materia-35.png.avif',
+    editoria: mockEditorias[1], // Bahia
+    publicadoEm: new Date(now.getTime() - 60 * 60000).toISOString(),
+    views: 2890
+  },
+  {
     id: 'n5',
-    titulo: 'Bahia vence o clássico no Barradão com gol nos acréscimos e assume a liderança do campeonato',
-    subtitulo: 'Partida eletrizante termina em 3 a 2 após virada dramática e incendeia a torcida tricolor em todo o estado.',
-    conteudo: `O clássico Ba-Vi deste domingo no estádio Manoel Barradas entrou para a história como um dos mais disputados dos últimos anos. Com duas expulsões e alternâncias no placar, o Esporte Clube Bahia superou o arquirrival Vitória por 3 a 2, consolidando-se no topo da tabela de classificação geral.
-
-O Vitória começou impondo o ritmo de jogo e abriu o placar logo aos 12 minutos do primeiro tempo com chute cruzado. O Bahia empatou no início da segunda etapa, mas sofreu o segundo gol logo em seguida em lance de contra-ataque rápido.
-
-A virada tricolor começou com um cabeceio certeiro aos 38 minutos. Quando a partida parecia caminhar para o empate, o meia-atacante aproveitou uma sobra na entrada da grande área aos 48 minutos para chutar rasteiro no canto esquerdo, definindo a vitória e garantindo os três pontos valiosos no campeonato.`,
-    slug: 'bahia-vence-classico-no-barradao-gol-nos-acrescimos',
-    imagem: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=800&auto=format&fit=crop&q=80',
-    editoria: mockEditorias[5], // Esportes
-    publicadoEm: new Date(now.getTime() - 420 * 60000).toISOString(), // 7h ago
+    titulo: 'Porsche cai em córrego na Avenida ACM',
+    subtitulo: 'Motorista perde controle do carro esportivo de luxo que acaba despencando no canal da movimentada avenida de Salvador.',
+    conteudo: 'Um carro esportivo de luxo, modelo Porsche, acabou caindo no córrego que divide as pistas da Avenida ACM, em Salvador, após o condutor perder o controle da direção na madrugada desta quinta-feira. Equipes da Transalvador e guinchos especializados foram acionados para a retirada do automóvel do canal. O motorista teve apenas escoriações leves e foi atendido no local.',
+    slug: 'porsche-cai-em-corrego-na-avenida-acm',
+    imagem: 'https://sociedadeonline.com/wp-content/smush-avif/2023/10/av-acm-320x240.jpg.avif',
+    editoria: mockEditorias[0], // Salvador
+    publicadoEm: new Date(now.getTime() - 120 * 60000).toISOString(),
     views: 5670
   },
   {
     id: 'n6',
-    titulo: 'Festival de Inverno de Vitória da Conquista anuncia line-up oficial com grandes nomes da MPB e do Pop Rock',
-    subtitulo: 'Evento tradicional do sudoeste baiano projeta atrair mais de 80 mil pessoas nos três dias de shows em agosto.',
-    conteudo: `O Festival de Inverno da Bahia (FIB) revelou os nomes que irão compor a grade principal de seu palco na edição deste ano. O evento, realizado em Vitória da Conquista, destaca-se por movimentar o turismo do interior com temperaturas que chegam a marcar 12 graus no auge do inverno baiano.
-
-Entre as atrações nacionais confirmadas, estão artistas icônicos da MPB, bandas consagradas de pop rock nacional e estrelas da nova geração da música nordestina. A estrutura da festa também contará com praça de alimentação gourmetizada integrada, ativações tecnológicas das marcas patrocinadoras e um palco alternativo dedicado à valorização do talento de artistas regionais.
-
-Os ingressos começam a ser vendidos nos pontos oficiais credenciados e internet a partir da próxima terça-feira, com preços promocionais para o passaporte que dá acesso a todos os dias do festival.`,
-    slug: 'festival-de-inverno-vitoria-da-conquista-line-up-oficial',
-    imagem: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=800&auto=format&fit=crop&q=80',
-    editoria: mockEditorias[6], // Entretenimento
-    publicadoEm: new Date(now.getTime() - 1440 * 60000).toISOString(), // 1 day ago
-    views: 1980
+    titulo: 'Prefeitura inicia segunda etapa da requalificação da Avenida Dorival Caymmi',
+    subtitulo: 'Obras em Itapuã avançam para melhorar a mobilidade urbana e o trânsito em uma das principais vias da capital.',
+    conteudo: 'A Prefeitura de Salvador deu início à segunda fase de obras de drenagem, recapeamento e requalificação urbana da Avenida Dorival Caymmi, em Itapuã. O projeto completo de infraestrutura visa desafogar o tráfego de veículos na região e proporcionar novas calçadas com acessibilidade total, paisagismo moderno e faixas de ciclovias para os moradores soteropolitanos.',
+    slug: 'prefeitura-inicia-segunda-etapa-da-requalificacao-da-avenida-dorival-caymmi',
+    imagem: 'https://sociedadeonline.com/wp-content/smush-avif/2026/06/Foto-para-materia-34-320x240.png.avif',
+    editoria: mockEditorias[0], // Salvador
+    publicadoEm: new Date(now.getTime() - 180 * 60000).toISOString(),
+    views: 1210
   },
   {
     id: 'n7',
-    titulo: 'Estudo revela potencial arqueológico intocado em cavernas da Chapada Diamantina',
-    subtitulo: 'Pesquisadores encontram pinturas rupestres e fósseis de megafauna pré-histórica em áreas de preservação ambiental fechadas ao público.',
-    conteudo: `Um grupo multidisciplinar de arqueólogos e geólogos de universidades federais publicou um relatório preliminar detalhando novas descobertas em cavernas inexploradas no Parque Nacional da Chapada Diamantina.
-
-Os pesquisadores catalogaram dezenas de inscrições em paredes rochosas datadas de mais de 8 mil anos atrás, retratando cenas de caça e rituais sagrados de populações caçadoras-coletoras que habitavam a região muito antes da colonização.
-
-Além disso, foram recuperados fragmentos ósseos fossilizados atribuídos a preguiças-gigantes e tigres-dente-de-sabre que vagavam pelo interior do estado no período do Pleistoceno. O material será catalogado e exposto temporariamente em museus de geologia do estado de forma rotativa.`,
-    slug: 'estudo-revela-potencial-arqueologico-cavernas-chapada-diamantina',
-    imagem: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&auto=format&fit=crop&q=80',
+    titulo: 'Homem decepa próprio pé para receber valor milionário em indenização',
+    subtitulo: 'Caso inusitado e sob investigação policial ocorre no interior da Bahia com suspeita de fraude contra seguradora.',
+    conteudo: 'A Polícia Civil está investigando um caso em que um morador do interior baiano teria decepado o próprio pé de forma deliberada com o objetivo de fraudar seguros e receber uma indenização estimada em mais de R$ 1 milhão. As circunstâncias do acidente foram consideradas suspeitas pelos peritos médicos e investigadores de seguros, que alertaram as autoridades policiais da comarca local.',
+    slug: 'homem-decepa-proprio-pe-para-receber-valor-milionario-em-indenizacao',
+    imagem: 'https://sociedadeonline.com/wp-content/smush-avif/2026/06/Foto-para-materia-100-320x240.png.avif',
     editoria: mockEditorias[1], // Bahia
-    publicadoEm: new Date(now.getTime() - 2880 * 60000).toISOString(), // 2 days ago
-    views: 1105
+    publicadoEm: new Date(now.getTime() - 240 * 60000).toISOString(),
+    views: 7420
   },
   {
     id: 'n8',
-    titulo: 'Prefeitura de Salvador anuncia novo programa de habitação popular no subúrbio ferroviário',
-    subtitulo: 'Projeto prevê construção de 1.200 unidades habitacionais com financiamento da Caixa Econômica Federal.',
-    conteudo: `A Prefeitura de Salvador lançou nesta terça-feira o Programa Morar Bem Salvador, voltado para famílias de baixa renda que vivem em áreas de risco no Subúrbio Ferroviário. O projeto conta com aporte inicial de R$ 480 milhões do governo federal via Caixa Econômica Federal.
-
-As obras serão realizadas em etapas e devem beneficiar mais de 4 mil pessoas diretamente. Cada unidade terá dois quartos, sala, cozinha e área de serviço, com infraestrutura de saneamento básico, iluminação pública LED e calçamento padronizado nas vias de acesso.`,
-    slug: 'prefeitura-de-salvador-anuncia-programa-habitacao-popular-suburbio',
-    imagem: 'https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=800&auto=format&fit=crop&q=80',
-    editoria: mockEditorias[0], // Salvador
-    publicadoEm: new Date(now.getTime() - 45 * 60000).toISOString(), // 45 min ago
-    audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3',
-    views: 743
+    titulo: 'Cinthya Marabá lança pré-candidatura em Luís Eduardo Magalhães',
+    subtitulo: 'Evento político reúne apoiadores e lideranças da região oeste para anunciar o projeto eleitoral da pré-candidata.',
+    conteudo: 'O cenário eleitoral da cidade de Luís Eduardo Magalhães, no oeste do estado, ganhou movimentações nesta semana com o lançamento oficial da pré-candidatura de Cinthya Marabá. O evento político reuniu diversos partidos da base de apoio, empresários proeminentes do agronegócio e lideranças comunitárias da região interessadas em suas propostas para o município.',
+    slug: 'cinthya-maraba-lanca-pre-candidatura-em-luis-eduardo-magalhaes',
+    imagem: 'https://sociedadeonline.com/wp-content/smush-avif/2026/06/Foto-para-materia-79-1-320x240.png.avif',
+    editoria: mockEditorias[1], // Bahia
+    publicadoEm: new Date(now.getTime() - 300 * 60000).toISOString(),
+    views: 1890
   },
   {
     id: 'n9',
-    titulo: 'Seleção Brasileira sub-20 vence Argentina e avança para final do Sul-Americano',
-    subtitulo: 'Gol nos acréscimos garante vaga histórica e acirra rivalidade continental no futebol juvenil.',
-    conteudo: `A Seleção Brasileira sub-20 protagonizou uma tarde épica ao eliminar a Argentina por 2 a 1 nos acréscimos, garantindo vaga na grande final do Campeonato Sul-Americano Sub-20. A partida, disputada em Cali, na Colômbia, foi marcada por alta intensidade e muita disputa física.
-
-O Brasil abriu o placar ainda no primeiro tempo com finalização precisa do atacante, mas levou o empate logo após a retomada da segunda etapa. Com o duelo equilibrado, o gol da classificação saiu aos 47 minutos do segundo tempo, em cabeçada certeira que levou os brasileiros ao delírio nas arquibancadas.`,
-    slug: 'selecao-brasileira-sub-20-vence-argentina-final-sul-americano',
-    imagem: 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800&auto=format&fit=crop&q=80',
+    titulo: 'Diogo Defante é detido durante cobertura da Copa nos Estados Unidos',
+    subtitulo: 'Humorista e repórter brasileiro passa por apuros com policiais americanos enquanto gravava conteúdo humorístico na rua.',
+    conteudo: 'O humorista e influenciador Diogo Defante foi detido brevemente por autoridades policiais dos Estados Unidos durante a cobertura dos bastidores do torneio mundial de futebol. O comediante realizava suas tradicionais esquetes de humor de forma descontraída perto do estádio, o que gerou desconfiança e intervenção dos agentes locais de segurança. Ele prestou esclarecimentos e foi liberado em seguida.',
+    slug: 'diogo-defante-e-detido-durante-cobertura-da-copa-nos-estados-unidos',
+    imagem: 'https://sociedadeonline.com/wp-content/smush-avif/2026/06/WhatsApp-Image-2026-06-15-at-09.52.17-320x240.jpeg.avif',
     editoria: mockEditorias[5], // Esportes
-    publicadoEm: new Date(now.getTime() - 120 * 60000).toISOString(), // 2h ago
-    audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3',
+    publicadoEm: new Date(now.getTime() - 360 * 60000).toISOString(),
+    views: 6540
+  },
+  {
+    id: 'n10',
+    titulo: 'Copa de 2026 é marcada por polêmicas além do futebol',
+    subtitulo: 'Atrasos logísticos, protestos nos arredores e discussões de arbitragem pautam os debates da primeira semana do torneio.',
+    conteudo: 'A Copa do Mundo de 2026 vem chamando atenção não só pelos belos lances de gol nos gramados da América do Norte, mas também por uma série de polêmicas organizacionais. Problemas de locomoção de torcedores, manifestações civis em frente aos estádios e falhas de comunicação da arbitragem figuram entre as reclamações oficiais das seleções envolvidas.',
+    slug: 'copa-de-2026-e-marcada-por-polemicas-alem-do-futebol',
+    imagem: 'https://sociedadeonline.com/wp-content/smush-avif/2026/06/WhatsApp-Image-2026-06-14-at-14.42.59-320x240.jpeg.avif',
+    editoria: mockEditorias[5], // Esportes
+    publicadoEm: new Date(now.getTime() - 420 * 60000).toISOString(),
+    views: 4320
+  },
+  {
+    id: 'n11',
+    titulo: 'Saiba como foi o primeiro dia de Copa do Mundo',
+    subtitulo: 'Abertura oficial e primeiros confrontos agitam torcedores ao redor do planeta com grandes atuações em campo.',
+    conteudo: 'O pontapé inicial da Copa do Mundo foi dado em grande estilo com a cerimônia de abertura e as primeiras partidas. Os torcedores presenciaram grandes duelos e muita animação de fãs de futebol do mundo inteiro. A cobertura completa destaca o desempenho das equipes favoritas e as primeiras surpresas táticas apresentadas pelos técnicos das seleções de menor expressão.',
+    slug: 'saiba-como-foi-o-primeiro-dia-de-copa-do-mundo',
+    imagem: 'https://sociedadeonline.com/wp-content/smush-avif/2026/06/Foto-para-materia-96-320x240.png.avif',
+    editoria: mockEditorias[5], // Esportes
+    publicadoEm: new Date(now.getTime() - 480 * 60000).toISOString(),
     views: 3210
+  },
+  {
+    id: 'n12',
+    titulo: 'Casal acumula quase R$ 1 milhão em multas por recusar vacinação dos filhos',
+    subtitulo: 'Decisão judicial na Bahia impõe sanção histórica de multa diária após descumprimento reiterado das ordens da Justiça.',
+    conteudo: 'Um casal baiano acumula quase R$ 1 milhão em multas devido à recusa reiterada de vacinar seus filhos menores de idade com as vacinas obrigatórias da infância. A decisão judicial visa proteger a integridade de saúde dos menores, uma vez que a vacinação é considerada um direito fundamental coletivo que prevalece sobre crenças ideológicas ou religiosas particulares dos responsáveis.',
+    slug: 'casal-acumula-quase-r-1-milhao-em-multas-por-recusar-vacinacao-dos-filhos',
+    imagem: 'https://sociedadeonline.com/wp-content/smush-avif/2023/10/25_01_2022_Avanco-Vacinacao-Infantil-_Fot-Bruno-Concha_Secom_Pms-10-2048x1365-1-560x420.jpg.avif',
+    editoria: mockEditorias[2], // Brasil
+    publicadoEm: new Date(now.getTime() - 600 * 60000).toISOString(),
+    views: 5120
+  },
+  {
+    id: 'n13',
+    titulo: 'Inmet alerta para chuvas intensas em 31 cidades da Bahia',
+    subtitulo: 'Boletim meteorológico indica possibilidade de fortes temporais com rajadas de vento e riscos de deslizamento no estado.',
+    conteudo: 'O Instituto Nacional de Meteorologia (Inmet) emitiu um aviso meteorológico de perigo para fortes pancadas de chuva cobrindo 31 cidades no território baiano. O acumulado de chuva pode passar de 50 milímetros por dia, exigindo atenção redobrada dos órgãos de Defesa Civil em áreas litorâneas e de encostas por conta do perigo de deslizamentos de terra.',
+    slug: 'inmet-alerta-para-chuvas-intensas-em-31-cidades-da-bahia',
+    imagem: 'https://sociedadeonline.com/wp-content/smush-avif/2026/06/WhatsApp-Image-2026-06-14-at-15.15.44-560x420.jpeg.avif',
+    editoria: mockEditorias[1], // Bahia
+    publicadoEm: new Date(now.getTime() - 720 * 60000).toISOString(),
+    views: 3310
+  },
+  {
+    id: 'n14',
+    titulo: 'Operação mira organização criminosa no Baixo Sul da Bahia',
+    subtitulo: 'Polícia cumpre mandados de prisão e busca contra quadrilha acusada de lavagem de dinheiro e desvio de verba municipal.',
+    conteudo: 'Uma ação conjunta entre forças policiais resultou na deflagração de uma grande operação no Baixo Sul da Bahia para desmantelar um grupo especializado em desvio de recursos da saúde e fraudes em licitações públicas municipais. Diversos mandados de busca foram cumpridos e bens de luxo dos envolvidos foram apreendidos pela Justiça Federal.',
+    slug: 'operacao-mira-organizacao-criminosa-no-baixo-sul-da-bahia',
+    imagem: 'https://sociedadeonline.com/wp-content/smush-avif/2026/02/Foto-para-materia-108-560x420.png.avif',
+    editoria: mockEditorias[1], // Bahia
+    publicadoEm: new Date(now.getTime() - 840 * 60000).toISOString(),
+    views: 4190
+  },
+  {
+    id: 'n15',
+    titulo: 'Receita apreende 15 iPhones em aeroporto de Salvador',
+    subtitulo: 'Aparelhos trazidos por passageiro de voo internacional não foram declarados e foram retidos pela fiscalização.',
+    conteudo: 'Agentes da Receita Federal lotados no Aeroporto Internacional de Salvador apreenderam 15 aparelhos iPhone de última geração na bagagem de um passageiro procedente do exterior. Os celulares estavam escondidos na mala e não possuíam nota fiscal nem a documentação de importação regular de bagagens. Os produtos foram confiscados e o passageiro autuado.',
+    slug: 'receita-apreende-15-iphones-em-aeroporto-de-salvador',
+    imagem: 'https://sociedadeonline.com/wp-content/smush-avif/2023/01/uso_de_smartphone_e_celular050720211245-560x420.jpg.avif',
+    editoria: mockEditorias[0], // Salvador
+    publicadoEm: new Date(now.getTime() - 960 * 60000).toISOString(),
+    views: 1980
+  },
+  {
+    id: 'n16',
+    titulo: 'Filho é preso suspeito de matar e esquartejar pai na Bahia',
+    subtitulo: 'Crime bárbaro choca moradores de Feira de Santana após a prisão em flagrante do principal suspeito.',
+    conteudo: 'Um homem foi preso em flagrante no município de Feira de Santana sob a acusação de ter assassinado e esquartejado o próprio pai. Vizinhos ouviram discussões na residência e acionaram os policiais militares. O corpo da vítima foi localizado nos fundos do imóvel e a perícia criminal está colhendo detalhes da motivação do crime.',
+    slug: 'filho-e-preso-suspeito-de-matar-e-esquartejar-pai-na-bahia',
+    imagem: 'https://sociedadeonline.com/wp-content/smush-avif/2026/03/Foto-para-materia-13-2-560x420.png.avif',
+    editoria: mockEditorias[1], // Bahia
+    publicadoEm: new Date(now.getTime() - 1080 * 60000).toISOString(),
+    views: 6120
+  },
+  {
+    id: 'n17',
+    titulo: 'Carro pega fogo em frente a supermercado em Salvador',
+    subtitulo: 'Incêndio destrói veículo particular e causa lentidão e curiosidade no trânsito na Avenida Octávio Mangabeira.',
+    conteudo: 'Um carro de passeio começou a pegar fogo no início da tarde desta quinta-feira em frente a um conhecido supermercado na Avenida Octávio Mangabeira, na orla de Salvador. Os bombeiros agiram rapidamente para controlar as chamas, evitando maiores acidentes. Ninguém ficou ferido no ocorrido, mas o tráfego local registrou enorme lentidão nos dois sentidos.',
+    slug: 'carro-pega-fogo-em-frente-a-supermercado-em-salvador',
+    imagem: 'https://sociedadeonline.com/wp-content/smush-avif/2026/06/Foto-para-materia-32-1-560x420.png.avif',
+    editoria: mockEditorias[0], // Salvador
+    publicadoEm: new Date(now.getTime() - 1200 * 60000).toISOString(),
+    views: 2340
+  },
+  {
+    id: 'n18',
+    titulo: 'Arraiá do Coração leva forró de qualidade para o Shopping Piedade',
+    subtitulo: 'Programação cultural junina gratuita conta com trios de forró, dança e comidas típicas para os visitantes.',
+    conteudo: 'O Shopping Piedade iniciou as comemorações de São João com a atração "Arraiá do Coração". O evento promove apresentações gratuitas de forró pé-de-serra na praça central do shopping, além de barracas com iguarias típicas e decorações caipiras. É uma excelente opção de entretenimento e cultura para quem está fazendo compras no centro de Salvador.',
+    slug: 'arraia-do-coracao-leva-muito-forro-para-o-shopping-piedade',
+    imagem: 'https://sociedadeonline.com/wp-content/smush-avif/2026/06/IMG-20260616-WA0059-560x420.jpg.avif',
+    editoria: mockEditorias[0], // Salvador
+    publicadoEm: new Date(now.getTime() - 1320 * 60000).toISOString(),
+    views: 1220
+  },
+  {
+    id: 'n19',
+    titulo: 'Operação investiga grupo suspeito de fraudar benefícios previdenciários',
+    subtitulo: 'Força-tarefa da PF descobre fraude em aposentadorias que gerou prejuízos milionários aos cofres do INSS na Bahia.',
+    conteudo: 'Uma operação policial foi deflagrada pela PF para apurar irregularidades na concessão de pensões e aposentadorias rurais. O grupo investigado falsificava certidões de atividade rural de pessoas que moravam na cidade para obter o benefício previdenciário de forma irregular. As buscas continuam para prender os líderes do esquema financeiro.',
+    slug: 'operacao-investiga-grupo-suspeito-de-fraudar-beneficios-previdenciarios',
+    imagem: 'https://sociedadeonline.com/wp-content/smush-avif/2026/02/Foto-para-materia-2-20-560x420.png.avif',
+    editoria: mockEditorias[2], // Brasil
+    publicadoEm: new Date(now.getTime() - 1440 * 60000).toISOString(),
+    views: 1950
+  },
+  {
+    id: 'n20',
+    titulo: 'Produção de manga fortalece a economia e as exportações de Juazeiro',
+    subtitulo: 'Fruticultura irrigada no Vale do São Francisco registra recorde de envios e movimenta milhões na região.',
+    conteudo: 'A colheita e exportação de manga na região de Juazeiro, no norte do estado, registraram excelentes resultados neste trimestre. A fruticultura irrigada consolidou-se como um dos principais motores do agronegócio da Bahia, enviando toneladas da fruta de alta qualidade para mercados dos EUA e da Europa e gerando empregos no campo.',
+    slug: 'producao-de-manga-fortalece-economia-e-exportacoes-de-juazeiro',
+    imagem: 'https://sociedadeonline.com/wp-content/smush-avif/2026/06/Foto-para-materia-33-560x420.png.avif',
+    editoria: mockEditorias[4], // Economia
+    publicadoEm: new Date(now.getTime() - 1560 * 60000).toISOString(),
+    views: 2450
+  },
+  {
+    id: 'n21',
+    titulo: 'PF cumpre mandados na Bahia e em Pernambuco durante ação contra o tráfico',
+    subtitulo: 'Operação interestadual foca na desarticulação financeira de quadrilhas de entorpecentes no vale são-franciscano.',
+    conteudo: 'A Polícia Federal deflagrou a operação para cumprir diversos mandados de busca e apreensão de bens e contas bancárias ligadas a chefes do tráfico de drogas que atuam na divisa entre a Bahia e Pernambuco. Os policiais confiscaram bens avaliados em milhões de reais e continuam as buscas por foragidos da Justiça.',
+    slug: 'pf-cumpre-mandados-na-bahia-e-em-pernambuco-durante-acao-contra-o-trafico',
+    imagem: 'https://sociedadeonline.com/wp-content/smush-avif/2026/05/foto-capa-2026-05-04T083722.290-560x420.png.avif',
+    editoria: mockEditorias[1], // Bahia
+    publicadoEm: new Date(now.getTime() - 1680 * 60000).toISOString(),
+    views: 3820
+  },
+  {
+    id: 'n22',
+    titulo: 'Justiça condena policial militar por uso irregular de recursos públicos',
+    subtitulo: 'Oficial da PM na Bahia é sentenciado à perda do cargo e devolução de valores desviados em licitações internas.',
+    conteudo: 'O Tribunal de Justiça acolheu o pedido do Ministério Público e condenou um oficial da PM-BA por improbidade administrativa e uso inadequado de verbas públicas em reformas de sedes policiais. Além da destituição do posto, a sentença ordena o ressarcimento integral dos valores aos cofres do tesouro público.',
+    slug: 'justica-condena-policial-militar-por-uso-irregular-de-recursos-publicos',
+    imagem: 'https://sociedadeonline.com/wp-content/smush-avif/2026/03/Foto-para-materia-2026-03-02T175308.650-560x420.png.avif',
+    editoria: mockEditorias[3], // Política
+    publicadoEm: new Date(now.getTime() - 1800 * 60000).toISOString(),
+    views: 2980
+  },
+  {
+    id: 'n23',
+    titulo: 'Curso de Formação de Sargentos da Aeronáutica recebe inscrições até julho',
+    subtitulo: 'Força Aérea Brasileira oferece vagas de nível médio para diversas áreas técnicas e operacionais do país.',
+    conteudo: 'Estão abertas as inscrições para o concurso da Escola de Especialistas de Aeronáutica (EEAR). São dezenas de vagas para ambos os sexos destinadas a especialidades como mecânica, eletrônica, administração e controle de tráfego aéreo. Os interessados devem efetuar a inscrição pela internet até o prazo limite estipulado no edital oficial.',
+    slug: 'curso-de-formacao-de-sargentos-da-aeronautica-recebe-inscricoes-ate-julho',
+    imagem: 'https://sociedadeonline.com/wp-content/smush-avif/2026/06/Foto-para-materia-2-5-560x420.png.avif',
+    editoria: mockEditorias[2], // Brasil
+    publicadoEm: new Date(now.getTime() - 1920 * 60000).toISOString(),
+    views: 1540
+  },
+  {
+    id: 'n24',
+    titulo: 'Hospital Regional do Sisal deve ser entregue no primeiro semestre de 2027',
+    subtitulo: 'Obras em Serrinha avançam e prometem descentralizar os atendimentos de urgência médica na região sisaleira.',
+    conteudo: 'A construção do novo Hospital Regional do Sisal, em Serrinha, está com cronograma adiantado. De acordo com a Sesab, o novo equipamento público terá leitos de terapia intensiva e centro de diagnóstico completo, evitando que pacientes da região tenham que se deslocar até Salvador para consultas e procedimentos cirúrgicos complexos.',
+    slug: 'hospital-regional-do-sisal-deve-ser-entregue-no-primeiro-semestre-de-2027',
+    imagem: 'https://sociedadeonline.com/wp-content/smush-avif/2026/06/Foto-para-materia-1-8-560x420.png.avif',
+    editoria: mockEditorias[1], // Bahia
+    publicadoEm: new Date(now.getTime() - 2040 * 60000).toISOString(),
+    views: 1120
+  },
+  {
+    id: 'n25',
+    titulo: 'Boi gordo inicia semana com mercado lento e preços firmes',
+    subtitulo: 'Cotações no agronegócio mantêm estabilidade na arroba com pouca oscilação nas principais praças da Bahia.',
+    conteudo: 'O mercado físico do boi gordo começou o período de negociações comerciais com liquidez moderada e manutenção dos preços da arroba. Os pecuaristas baianos continuam segurando as vendas de lotes maiores aguardando melhores ofertas, enquanto os frigoríficos locais operam com escalas de abate confortáveis para os próximos dias.',
+    slug: 'boi-gordo-inicia-semana-com-mercado-lento-e-precos-firmes',
+    imagem: 'https://sociedadeonline.com/wp-content/smush-avif/2023/02/gado-1-560x420.jpg.avif',
+    editoria: mockEditorias[4], // Economia
+    publicadoEm: new Date(now.getTime() - 2160 * 60000).toISOString(),
+    views: 980
+  },
+  {
+    id: 'n26',
+    titulo: 'Anvisa cria grupo para avaliar vacina da dengue do Butantan',
+    subtitulo: 'Agência cria comitê especial para agilizar a análise técnica do imunizante nacional contra a doença.',
+    conteudo: 'A Agência Nacional de Vigilância Sanitária (Anvisa) instituiu um grupo técnico de emergência para avaliar com celeridade os dados de eficácia e segurança da vacina da dengue produzida pelo Instituto Butantan. A medida visa acelerar o processo de aprovação de registro sanitário para disponibilizar a vacina no SUS o quanto antes.',
+    slug: 'anvisa-cria-grupo-para-avaliar-vacina-da-dengue-do-butantan',
+    imagem: 'https://sociedadeonline.com/wp-content/uploads/2024/12/vacina_dengue_07-560x420.webp',
+    editoria: mockEditorias[2], // Brasil
+    publicadoEm: new Date(now.getTime() - 2280 * 60000).toISOString(),
+    views: 1670
+  },
+  {
+    id: 'n27',
+    titulo: 'Adriane Galisteu compartilha receita para mulheres no climatério e menopausa',
+    subtitulo: 'Apresentadora fala abertamente sobre saúde da mulher e divide dicas de nutrição e bem-estar em suas redes.',
+    conteudo: 'A famosa apresentadora Adriane Galisteu chamou a atenção de seus seguidores ao compartilhar receitas saudáveis e dicas de cuidados específicos voltados para mulheres que estão passando pela transição do climatério e menopausa. Ela ressaltou a importância do acompanhamento médico e da alimentação para aliviar os sintomas do período.',
+    slug: 'adriane-galisteu-compartilha-receita-para-mulheres-no-climaterio-e-menopausa',
+    imagem: 'https://sociedadeonline.com/wp-content/smush-avif/2026/06/WhatsApp-Image-2026-06-16-at-10.06.23-560x420.jpeg.avif',
+    editoria: mockEditorias[6], // Entretenimento
+    publicadoEm: new Date(now.getTime() - 2400 * 60000).toISOString(),
+    views: 2110
+  },
+  {
+    id: 'n28',
+    titulo: 'Salvador amplia vacinação com atendimento até 19h nesta terça',
+    subtitulo: 'Postos de saúde da capital baiana funcionam em horário estendido para facilitar o acesso da população às vacinas.',
+    conteudo: 'Para aumentar a cobertura vacinal contra gripe, covid-19 e outras doenças do calendário regular de vacinação, a prefeitura de Salvador disponibilizou postos com horário de atendimento estendido até as 19h nesta terça-feira. A população é incentivada a levar a caderneta para atualização das doses pendentes.',
+    slug: 'salvador-amplia-vacinacao-com-atendimento-ate-19h-nesta-terca',
+    imagem: 'https://sociedadeonline.com/wp-content/smush-avif/2025/07/167644pesquisadores-avancam-na-criacao-da-vacina-universal-contra-o-cancer-3-560x420.jpg.avif',
+    editoria: mockEditorias[0], // Salvador
+    publicadoEm: new Date(now.getTime() - 2520 * 60000).toISOString(),
+    views: 1890
+  },
+  {
+    id: 'n29',
+    titulo: 'Problemas de visão podem afetar desempenho escolar de crianças, explica Dr. André Lavigne',
+    subtitulo: 'Oftalmologista alerta pais e educadores para os sinais de dificuldades visuais em idade escolar na Bahia.',
+    conteudo: 'Em entrevista especial, o oftalmologista Dr. André Lavigne detalhou como problemas refrativos comuns, como miopia e astigmatismo não diagnosticados, são causas frequentes de queda no rendimento de aprendizado de alunos infantis. Ele orienta a realização de exames periódicos anuais antes do início de cada ano letivo.',
+    slug: 'problemas-de-visao-podem-afetar-desempenho-escolar-de-criancas-explica-dr-andre-lavigne',
+    imagem: 'https://sociedadeonline.com/wp-content/smush-avif/2026/06/Foto-para-materia-2026-06-16T082908.466-560x420.png.avif',
+    editoria: mockEditorias[0], // Salvador
+    publicadoEm: new Date(now.getTime() - 2640 * 60000).toISOString(),
+    views: 1240
+  },
+  {
+    id: 'n30',
+    titulo: 'Rádio Sociedade promove tarde de forró no Shopping Piedade',
+    subtitulo: 'Ação especial em Salvador leva show ao vivo de bandas de forró e brindes para os frequentadores do centro comercial.',
+    conteudo: 'Uma tarde de muita música e animação junina movimentou o Shopping Piedade nesta semana. Em parceria com a Rádio Sociedade da Bahia, o espaço promoveu apresentações gratuitas de forrozeiros, com distribuição de brindes exclusivos para os ouvintes da rádio mais tradicional da Bahia. O público dançou e festejou antecipando o São João.',
+    slug: 'radio-sociedade-promove-tarde-de-forro-no-shopping-piedade',
+    imagem: 'https://sociedadeonline.com/wp-content/smush-avif/2026/06/Foto-para-materia-32-560x420.png.avif',
+    editoria: mockEditorias[0], // Salvador
+    publicadoEm: new Date(now.getTime() - 2760 * 60000).toISOString(),
+    views: 1340
+  },
+  {
+    id: 'n31',
+    titulo: 'Prefeitura abre inscrições para credenciamento de blocos de rua',
+    subtitulo: 'Regras visam organizar circuitos tradicionais e garantir segurança da folia.',
+    conteudo: 'O cadastramento prévio é necessário para os blocos que desejam desfilar nos circuitos oficiais da capital.',
+    slug: 'carnaval-salvador-credenciamento-blocos-rua',
+    imagem: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&auto=format&fit=crop&q=80',
+    editoria: mockEditorias[6], // Entretenimento
+    publicadoEm: new Date(now.getTime() - 2040 * 60000).toISOString(),
+    views: 2980
+  }
+];
+
+// Mock data for radio programming
+export interface Programa {
+  id: string;
+  nome: string;
+  apresentador: string;
+  horario: string;
+  dias: string;
+  descricao: string;
+  foto: string;
+}
+
+export const mockProgramacao: Programa[] = [
+  {
+    id: 'prog1',
+    nome: 'Alvorada Sociedade',
+    apresentador: 'Roberto Mendes',
+    horario: '05:00 - 07:00',
+    dias: 'Segunda a Sexta',
+    descricao: 'As primeiras notícias do dia com análise e credibilidade.',
+    foto: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop&q=80'
+  },
+  {
+    id: 'prog2',
+    nome: 'Sociedade Urgente',
+    apresentador: 'Adelson Carvalho',
+    horario: '07:00 - 09:00',
+    dias: 'Segunda a Sexta',
+    descricao: 'Jornalismo direto ao ponto: trânsito, segurança e serviço público.',
+    foto: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&auto=format&fit=crop&q=80'
+  },
+  {
+    id: 'prog3',
+    nome: 'Manhã Sociedade',
+    apresentador: 'Patrícia Almeida',
+    horario: '09:00 - 12:00',
+    dias: 'Segunda a Sexta',
+    descricao: 'Entretenimento, cultura e entrevistas com personalidades da Bahia.',
+    foto: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&auto=format&fit=crop&q=80'
+  },
+  {
+    id: 'prog4',
+    nome: 'Sociedade Esportes',
+    apresentador: 'Cláudio Ramos',
+    horario: '12:00 - 14:00',
+    dias: 'Segunda a Sábado',
+    descricao: 'Tudo sobre o futebol baiano e o esporte nacional.',
+    foto: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&auto=format&fit=crop&q=80'
+  },
+  {
+    id: 'prog5',
+    nome: 'Sociedade Debate',
+    apresentador: 'Fernando Costa',
+    horario: '14:00 - 16:00',
+    dias: 'Segunda a Sexta',
+    descricao: 'Debates aprofundados sobre política, economia e sociedade.',
+    foto: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&auto=format&fit=crop&q=80'
+  },
+  {
+    id: 'prog6',
+    nome: 'Fim de Tarde',
+    apresentador: 'Ana Beatriz Santos',
+    horario: '16:00 - 19:00',
+    dias: 'Segunda a Sexta',
+    descricao: 'Música, informação e descontração para fechar o dia.',
+    foto: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&auto=format&fit=crop&q=80'
   }
 ];
 
@@ -235,6 +507,10 @@ export async function getItems<T>(collection: string, query?: any): Promise<T[]>
 
   if (collection === 'podcasts') {
     return mockPodcasts as unknown as T[];
+  }
+
+  if (collection === 'programacao') {
+    return mockProgramacao as unknown as T[];
   }
 
   return [] as T[];

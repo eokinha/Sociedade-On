@@ -17,7 +17,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <title>Sociedade ON | O Maior Portal de Notícias e Rádio da Bahia</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="Acompanhe as últimas notícias de Salvador, Bahia e do Brasil. Ouça a Rádio Sociedade 102.5 FM ao vivo, debates, podcasts, esportes e muito mais." key="description" />
-        
+
         {/* OpenGraph Fallback */}
         <meta property="og:site_name" content="Sociedade ON" key="og:site_name" />
         <meta property="og:type" content="website" key="og:type" />
@@ -25,7 +25,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta property="og:title" content="Sociedade ON | O Maior Portal de Notícias e Rádio da Bahia" key="og:title" />
         <meta property="og:description" content="Acompanhe as últimas notícias de Salvador, Bahia e do Brasil. Ouça a Rádio Sociedade 102.5 FM ao vivo." key="og:description" />
         <meta property="og:image" content="https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=1200&auto=format&fit=crop&q=80" key="og:image" />
-        
+
         {/* Twitter Fallback */}
         <meta name="twitter:card" content="summary_large_image" key="twitter:card" />
         <meta name="twitter:title" content="Sociedade ON | O Maior Portal de Notícias e Rádio da Bahia" key="twitter:title" />

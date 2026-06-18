@@ -1,11 +1,7 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import Head from 'next/head';
 import Link from 'next/link';
-import { Radio, Play, ChevronLeft, ChevronRight, Heart, Send, Eye, Music, X } from 'lucide-react';
-import { Noticia } from '../../../types/noticia';
-
-interface CortesRadioProps {
-  noticias?: Noticia[];
-}
+import { Radio, Play, ArrowLeft, Heart, Send, Eye, Music, X, ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface VideoCut {
   id: string;
@@ -16,11 +12,7 @@ interface VideoCut {
   data: string;
 }
 
-export const CortesRadio: React.FC<CortesRadioProps> = () => {
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(true);
-  
+export default function CortesPage() {
   // Reels States
   const [activeModalCutId, setActiveModalCutId] = useState<string | null>(null);
   const [copiedId, setCopiedId] = useState<string | null>(null);
@@ -92,38 +84,6 @@ export const CortesRadio: React.FC<CortesRadioProps> = () => {
     }
   ];
 
-  const checkScroll = () => {
-    if (scrollContainerRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
-      setCanScrollLeft(scrollLeft > 2);
-      setCanScrollRight(scrollLeft + clientWidth < scrollWidth - 2);
-    }
-  };
-
-  useEffect(() => {
-    const container = scrollContainerRef.current;
-    if (container) {
-      checkScroll();
-      container.addEventListener('scroll', checkScroll);
-      window.addEventListener('resize', checkScroll);
-      return () => {
-        container.removeEventListener('scroll', checkScroll);
-        window.removeEventListener('resize', checkScroll);
-      };
-    }
-  }, []);
-
-  const scroll = (direction: 'left' | 'right') => {
-    if (scrollContainerRef.current) {
-      const { clientWidth } = scrollContainerRef.current;
-      const scrollAmount = direction === 'left' ? -clientWidth * 0.75 : clientWidth * 0.75;
-      scrollContainerRef.current.scrollBy({
-        left: scrollAmount,
-        behavior: 'smooth'
-      });
-    }
-  };
-
   const handleLike = (id: string, e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
@@ -191,175 +151,162 @@ export const CortesRadio: React.FC<CortesRadioProps> = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [activeModalCutId, activeModalCutIndex]);
 
+  // Support direct linking to cuts (optional visual focus on load)
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const cutId = params.get('id');
+      if (cutId && videoCuts.some(c => c.id === cutId)) {
+        setActiveModalCutId(cutId);
+      }
+    }
+  }, []);
+
   return (
-    <section className="w-full py-8 select-none" id="cortes">
-      {/* Header Row */}
-      <div className="flex justify-between items-end mb-6 border-b border-gray-100 pb-3">
-        <div className="flex items-center gap-2.5">
-          <Radio className="w-4 h-4 text-brand-red animate-pulse" />
-          <h2 className="text-sm md:text-base font-black text-brand-blue uppercase tracking-tight leading-none">
-            CORTES DA RÁDIO
-          </h2>
-        </div>
-        
-        <div className="flex items-center gap-4">
-          {/* Carousel Controls */}
-          {videoCuts.length > 0 && (
-            <div className="flex items-center gap-1.5 mr-2">
-              <button
-                onClick={() => scroll('left')}
-                disabled={!canScrollLeft}
-                aria-label="Corte anterior"
-                className={`p-1.5 rounded-full border border-gray-200 transition-all duration-200 ${
-                  canScrollLeft 
-                    ? 'text-brand-blue hover:bg-brand-blue hover:text-white hover:border-brand-blue cursor-pointer' 
-                    : 'text-gray-300 border-gray-100 cursor-not-allowed'
-                }`}
-              >
-                <ChevronLeft className="w-3.5 h-3.5" />
-              </button>
-              <button
-                onClick={() => scroll('right')}
-                disabled={!canScrollRight}
-                aria-label="Próximo corte"
-                className={`p-1.5 rounded-full border border-gray-200 transition-all duration-200 ${
-                  canScrollRight 
-                    ? 'text-brand-blue hover:bg-brand-blue hover:text-white hover:border-brand-blue cursor-pointer' 
-                    : 'text-gray-300 border-gray-100 cursor-not-allowed'
-                }`}
-              >
-                <ChevronRight className="w-3.5 h-3.5" />
-              </button>
-            </div>
-          )}
-          <Link
-            href="/cortes"
-            className="text-xs font-black text-brand-blue hover:text-brand-yellow transition-colors uppercase tracking-wider shrink-0"
-          >
-            VER TODOS
+    <>
+      <Head>
+        <title>Cortes da Rádio | Sociedade ON</title>
+        <meta name="description" content="Assista aos melhores momentos, debates e entrevistas em vídeo dos programas da Rádio Sociedade." key="description" />
+      </Head>
+
+      <div className="flex flex-col gap-6 select-none">
+        {/* Breadcrumb */}
+        <div className="flex items-center gap-2 text-xs text-brand-gray">
+          <Link href="/" className="hover:text-brand-yellow font-bold flex items-center gap-1">
+            <ArrowLeft className="w-3 h-3" />
+            Home
           </Link>
+          <span>/</span>
+          <span className="text-brand-blue font-black">Cortes da Rádio</span>
         </div>
-      </div>
 
-      {/* Reels Carousel Container */}
-      <div 
-        ref={scrollContainerRef}
-        className="flex gap-5 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-4 no-scrollbar"
-      >
-        {videoCuts.map((cut) => {
-          const likedState = likes[cut.id] || { count: 0, active: false };
-          const viewCount = views[cut.id] || '0';
-          const isCopied = copiedId === cut.id;
+        {/* Header */}
+        <div className="border-b border-gray-200 pb-4">
+          <span className="inline-block w-8 h-1 mb-2 rounded bg-brand-red animate-pulse" />
+          <h1 className="text-3xl font-black text-brand-blue uppercase tracking-tight">
+            CORTES DA RÁDIO
+          </h1>
+          <p className="text-xs text-brand-gray mt-1 uppercase tracking-wider font-semibold">
+            Melhores momentos e entrevistas dos programas no formato Instagram Reels
+          </p>
+        </div>
 
-          return (
-            <div 
-              key={cut.id} 
-              onClick={() => setActiveModalCutId(cut.id)}
-              className="group relative aspect-[9/16] w-[200px] sm:w-[220px] md:w-[240px] shrink-0 snap-start rounded-2xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 bg-black cursor-pointer border border-white/5"
-            >
-              {/* Cover Thumbnail */}
-              <img
-                src={`https://img.youtube.com/vi/${cut.youtubeId}/hqdefault.jpg`}
-                alt={cut.titulo}
-                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out opacity-85"
-                loading="lazy"
-              />
+        {/* Instagram Reels Grid layout */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+          {videoCuts.map((cut) => {
+            const likedState = likes[cut.id] || { count: 0, active: false };
+            const viewCount = views[cut.id] || '0';
+            const isCopied = copiedId === cut.id;
 
-              {/* Dark Overlay Gradient (Reels Style) */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/35 to-black/10 z-10" />
+            return (
+              <div 
+                key={cut.id} 
+                onClick={() => setActiveModalCutId(cut.id)}
+                className="group relative aspect-[9/16] w-full rounded-2xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 bg-black cursor-pointer border border-white/5"
+              >
+                {/* Cover Thumbnail */}
+                <img
+                  src={`https://img.youtube.com/vi/${cut.youtubeId}/hqdefault.jpg`}
+                  alt={cut.titulo}
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out opacity-85"
+                  loading="lazy"
+                />
 
-              {/* Central Play Icon Overlay */}
-              <div className="absolute inset-0 flex items-center justify-center z-15 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white border border-white/30 scale-90 group-hover:scale-100 transition-transform duration-300">
-                  <Play className="w-5.5 h-5.5 fill-current ml-0.5" />
-                </div>
-              </div>
+                {/* Dark Overlay Gradient (Reels Style) */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/35 to-black/10 z-10" />
 
-              {/* Floating Instagram Action Buttons (Right-aligned) */}
-              <div className="absolute right-2.5 bottom-16 flex flex-col gap-4 items-center z-20">
-                {/* Heart Button */}
-                <button
-                  onClick={(e) => handleLike(cut.id, e)}
-                  className="flex flex-col items-center gap-0.5 group/btn"
-                  aria-label="Curtir corte"
-                >
-                  <div className="w-9 h-9 rounded-full bg-black/40 backdrop-blur-xs flex items-center justify-center border border-white/10 hover:bg-black/60 transition-colors transform active:scale-125 duration-200">
-                    <Heart 
-                      className={`w-4.5 h-4.5 transition-colors ${
-                        likedState.active 
-                          ? 'fill-brand-red text-brand-red' 
-                          : 'text-white group-hover/btn:text-brand-red/80'
-                      }`} 
-                    />
+                {/* Central Play Icon Overlay */}
+                <div className="absolute inset-0 flex items-center justify-center z-15 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                  <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white border border-white/30 scale-90 group-hover:scale-100 transition-transform duration-300">
+                    <Play className="w-5.5 h-5.5 fill-current ml-0.5" />
                   </div>
-                  <span className="text-[9px] font-bold text-white tracking-tight text-shadow-sm">
-                    {likedState.count}
-                  </span>
-                </button>
+                </div>
 
-                {/* Share Button */}
-                <div className="relative flex flex-col items-center gap-0.5 group/btn">
+                {/* Floating Instagram Action Buttons (Right-aligned) */}
+                <div className="absolute right-2 bottom-12 flex flex-col gap-3 items-center z-20">
+                  {/* Heart Button */}
                   <button
-                    onClick={(e) => handleShare(cut, e)}
-                    className="w-9 h-9 rounded-full bg-black/40 backdrop-blur-xs flex items-center justify-center border border-white/10 hover:bg-black/60 transition-colors transform active:scale-110 duration-200"
-                    aria-label="Compartilhar corte"
+                    onClick={(e) => handleLike(cut.id, e)}
+                    className="flex flex-col items-center gap-0.5 group/btn"
+                    aria-label="Curtir corte"
                   >
-                    <Send className="w-4.5 h-4.5 text-white -rotate-12 translate-x-px" />
+                    <div className="w-8 h-8 rounded-full bg-black/40 backdrop-blur-xs flex items-center justify-center border border-white/10 hover:bg-black/60 transition-colors transform active:scale-125 duration-200">
+                      <Heart 
+                        className={`w-4 h-4 transition-colors ${
+                          likedState.active 
+                            ? 'fill-brand-red text-brand-red' 
+                            : 'text-white group-hover/btn:text-brand-red/80'
+                        }`} 
+                      />
+                    </div>
+                    <span className="text-[8px] font-bold text-white tracking-tight text-shadow-sm">
+                      {likedState.count}
+                    </span>
                   </button>
-                  <span className="text-[9px] font-bold text-white tracking-tight text-shadow-sm">
-                    Enviar
-                  </span>
-                  {/* Share Tooltip */}
-                  {isCopied && (
-                    <div className="absolute bottom-11 right-0 bg-brand-blue text-white text-[9px] font-black px-2 py-1 rounded shadow-md whitespace-nowrap animate-float-in">
-                      Copiado!
-                    </div>
-                  )}
-                </div>
 
-                {/* Views Info */}
-                <div className="flex flex-col items-center gap-0.5">
-                  <div className="w-9 h-9 rounded-full bg-black/40 backdrop-blur-xs flex items-center justify-center border border-white/10">
-                    <Eye className="w-4.5 h-4.5 text-white" />
+                  {/* Share Button */}
+                  <div className="relative flex flex-col items-center gap-0.5 group/btn">
+                    <button
+                      onClick={(e) => handleShare(cut, e)}
+                      className="w-8 h-8 rounded-full bg-black/40 backdrop-blur-xs flex items-center justify-center border border-white/10 hover:bg-black/60 transition-colors transform active:scale-110 duration-200"
+                      aria-label="Compartilhar corte"
+                    >
+                      <Send className="w-4 h-4 text-white -rotate-12 translate-x-px" />
+                    </button>
+                    <span className="text-[8px] font-bold text-white tracking-tight text-shadow-sm">
+                      Enviar
+                    </span>
+                    {/* Share Tooltip */}
+                    {isCopied && (
+                      <div className="absolute bottom-10 right-0 bg-brand-blue text-white text-[9px] font-black px-2 py-1 rounded shadow-md whitespace-nowrap animate-float-in">
+                        Copiado!
+                      </div>
+                    )}
                   </div>
-                  <span className="text-[9px] font-bold text-white tracking-tight text-shadow-sm">
-                    {viewCount}
-                  </span>
-                </div>
-              </div>
 
-              {/* Bottom Details (Instagram Style) */}
-              <div className="absolute bottom-3 left-3 right-14 flex flex-col gap-2 z-20 pointer-events-none">
-                {/* Profile Header */}
-                <div className="flex items-center gap-1.5">
-                  {getProgramAvatar(cut.programa)}
-                  <span className="text-[10px] font-bold text-white tracking-wide truncate">
-                    @{cut.programa.toLowerCase().replace(/\s+/g, '')}
-                  </span>
-                  <span className="text-[9px] text-white/50">•</span>
-                  <span className="text-[9px] text-white/70 font-semibold">{cut.data}</span>
-                </div>
-
-                {/* Title */}
-                <h3 className="font-extrabold text-xs text-white leading-tight line-clamp-2 pr-1 text-shadow">
-                  {cut.titulo}
-                </h3>
-
-                {/* Music Loop */}
-                <div className="flex items-center gap-1 text-[9px] text-white/60 overflow-hidden w-full mt-0.5">
-                  <Music className="w-3 h-3 shrink-0" />
-                  <div className="overflow-hidden relative w-full h-3.5">
-                    <div className="animate-marquee absolute whitespace-nowrap flex gap-4">
-                      <span>Som Original - {cut.programa}</span>
-                      <span>Som Original - {cut.programa}</span>
-                      <span>Som Original - {cut.programa}</span>
+                  {/* Views Info */}
+                  <div className="flex flex-col items-center gap-0.5">
+                    <div className="w-8 h-8 rounded-full bg-black/40 backdrop-blur-xs flex items-center justify-center border border-white/10">
+                      <Eye className="w-4 h-4 text-white" />
                     </div>
+                    <span className="text-[8px] font-bold text-white tracking-tight text-shadow-sm">
+                      {viewCount}
+                    </span>
                   </div>
                 </div>
+
+                {/* Bottom Details (Instagram Style) */}
+                <div className="absolute bottom-2 left-2 right-12 flex flex-col gap-1.5 z-20 pointer-events-none">
+                  {/* Profile Header */}
+                  <div className="flex items-center gap-1">
+                    {getProgramAvatar(cut.programa)}
+                    <span className="text-[9px] font-bold text-white tracking-wide truncate max-w-[50px] sm:max-w-[80px]">
+                      @{cut.programa.toLowerCase().replace(/\s+/g, '')}
+                    </span>
+                    <span className="text-[8px] text-white/50">•</span>
+                    <span className="text-[8px] text-white/70 font-semibold">{cut.data}</span>
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="font-extrabold text-[10px] sm:text-xs text-white leading-tight line-clamp-2 pr-1 text-shadow">
+                    {cut.titulo}
+                  </h3>
+
+                  {/* Music Loop */}
+                  <div className="flex items-center gap-0.5 text-[8px] text-white/60 overflow-hidden w-full mt-0.5">
+                    <Music className="w-2.5 h-2.5 shrink-0" />
+                    <div className="overflow-hidden relative w-full h-3">
+                      <div className="animate-marquee absolute whitespace-nowrap flex gap-4">
+                        <span>Som Original - {cut.programa}</span>
+                        <span>Som Original - {cut.programa}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
 
       {/* Immersive Vertical Reels Modal */}
@@ -497,8 +444,6 @@ export const CortesRadio: React.FC<CortesRadioProps> = () => {
           </div>
         </div>
       )}
-    </section>
+    </>
   );
-};
-
-export default CortesRadio;
+}

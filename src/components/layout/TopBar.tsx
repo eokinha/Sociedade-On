@@ -1,5 +1,7 @@
 import React from 'react';
 import { usePlayer } from '../../hooks/usePlayer';
+import WidgetClima from '../common/widgets/WidgetClima';
+import WidgetCambio from '../common/widgets/WidgetCambio';
 
 export const TopBar: React.FC = () => {
   const { playAudio, isPlaying, currentAudioUrl, pauseAudio } = usePlayer();
@@ -16,7 +18,7 @@ export const TopBar: React.FC = () => {
   };
 
   return (
-    <div className="bg-brand-blue text-white text-[11px] font-sans font-medium border-b border-white/10 py-2.5 px-4 select-none">
+    <div className="bg-brand-blue text-white text-xs font-sans font-medium border-b border-white/10 py-2.5 px-4 select-none">
       <div className="max-w-[1360px] mx-auto flex justify-between items-center gap-4">
         
         {/* Left Side: Live indicator & frequency text */}
@@ -24,7 +26,7 @@ export const TopBar: React.FC = () => {
           {/* Badge Ao Vivo in red, with yellow blinking bullet */}
           <button
             onClick={handleLivePlay}
-            className="flex items-center gap-1.5 bg-brand-red text-white text-[10px] font-black uppercase px-2 py-0.5 rounded focus:outline-none tracking-wider shrink-0 transition-transform active:scale-95"
+            className="flex items-center gap-1.5 bg-brand-red text-white text-2xs font-black uppercase px-2 py-0.5 rounded focus:outline-none tracking-wider shrink-0 transition-transform active:scale-95"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-[#FFD700] animate-pulse-live" />
             <span>AO VIVO</span>
@@ -38,8 +40,20 @@ export const TopBar: React.FC = () => {
           </button>
         </div>
 
-        {/* Right Side: Contact & Social Vectors */}
-        <div className="hidden md:flex items-center gap-6">
+        {/* Right Side: Widgets + Social Vectors */}
+        <div className="hidden md:flex items-center gap-5">
+
+          {/* Clima Widget */}
+          <WidgetClima />
+
+          {/* Divider */}
+          <span className="w-px h-3.5 bg-white/15" />
+
+          {/* Câmbio Widget */}
+          <WidgetCambio />
+
+          {/* Divider */}
+          <span className="w-px h-3.5 bg-white/15" />
 
           <div className="flex items-center gap-4 text-white/80">
             <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-brand-yellow transition-colors" aria-label="Facebook">

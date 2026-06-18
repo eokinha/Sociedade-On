@@ -38,9 +38,9 @@ export const CardNoticia: React.FC<CardNoticiaProps> = ({ noticia, layout = 'ver
 
   if (layout === 'horizontal') {
     return (
-      <Link href={href} className={`group flex gap-3 items-center bg-white p-2.5 rounded-xl hover:shadow-md transition-all duration-300 border border-gray-100 hover:border-brand-yellow/10 ${className}`}>
+      <Link href={href} className={`group flex gap-3.5 items-center bg-white p-2 hover:shadow-md transition-all duration-300 border border-gray-100 hover:border-brand-red/10 rounded-none ${className}`}>
         {imageUrl && (
-          <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-20 relative rounded-lg overflow-hidden shrink-0 bg-gray-50">
+          <div className="aspect-[16/10] w-24 sm:w-28 md:w-32 relative overflow-hidden shrink-0 bg-gray-50 rounded-none shadow-xs">
             <img
               src={imageUrl}
               alt={noticia.titulo}
@@ -50,16 +50,16 @@ export const CardNoticia: React.FC<CardNoticiaProps> = ({ noticia, layout = 'ver
             />
           </div>
         )}
-        <div className="flex flex-col gap-1 justify-center min-w-0">
+        <div className="flex flex-col gap-1.5 justify-center min-w-0 flex-1">
           <div className="flex gap-2 items-center">
-            <TagEditoria editoria={noticia.editoria} />
-            <TempoPublicacao date={noticia.publicadoEm} />
+            <TagEditoria editoria={noticia.editoria} className="rounded-xs" />
+            <TempoPublicacao date={noticia.publicadoEm} className="text-xs font-semibold text-brand-gray" />
           </div>
-          <h3 className={`font-bold text-xs sm:text-sm md:text-base text-brand-blue group-hover:text-brand-yellow transition-colors duration-300 ${clampClass} leading-snug`}>
+          <h3 className={`font-extrabold text-xs sm:text-sm text-brand-blue group-hover:text-brand-yellow transition-colors duration-300 ${clampClass} leading-snug`}>
             {noticia.titulo}
           </h3>
           {showExcerpt && noticia.subtitulo && (
-            <p className="text-[11px] md:text-xs text-brand-gray line-clamp-2 leading-relaxed hidden sm:block">
+            <p className="text-xs text-brand-gray line-clamp-2 leading-relaxed hidden sm:block">
               {noticia.subtitulo}
             </p>
           )}
@@ -69,28 +69,28 @@ export const CardNoticia: React.FC<CardNoticiaProps> = ({ noticia, layout = 'ver
   }
 
   return (
-    <Link href={href} className="group flex flex-col gap-3 bg-white p-4 rounded-2xl hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-brand-yellow/10">
+    <Link href={href} className="group flex flex-col gap-3.5 bg-white p-3.5 hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-brand-red/10 rounded-none">
       {imageUrl && (
-        <div className="aspect-[16/10] w-full relative rounded-xl overflow-hidden shadow-sm bg-gray-50">
+        <div className="aspect-[16/10] w-full relative overflow-hidden shadow-xs bg-gray-50 rounded-none">
           <img
             src={imageUrl}
             alt={noticia.titulo}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500"
             loading="lazy"
             onError={(e) => { (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&auto=format&fit=crop&q=80'; }}
           />
         </div>
       )}
       <div className="flex flex-col gap-2">
-        <div className="flex gap-2 items-center">
-          <TagEditoria editoria={noticia.editoria} />
-          <TempoPublicacao date={noticia.publicadoEm} />
+        <div className="flex gap-2.5 items-center">
+          <TagEditoria editoria={noticia.editoria} className="rounded-xs" />
+          <TempoPublicacao date={noticia.publicadoEm} className="text-xs font-semibold text-brand-gray" />
         </div>
-        <h3 className={`font-bold text-sm sm:text-base md:text-lg text-brand-blue group-hover:text-brand-yellow transition-colors duration-300 ${clampClass} leading-snug`}>
+        <h3 className={`font-black text-sm sm:text-base md:text-lg text-brand-blue group-hover:text-brand-yellow transition-colors duration-300 ${clampClass} leading-tight`}>
           {noticia.titulo}
         </h3>
         {showExcerpt && noticia.subtitulo && (
-          <p className="text-xs md:text-sm text-brand-gray line-clamp-2 leading-relaxed">
+          <p className="text-xs md:text-sm text-brand-gray line-clamp-2 leading-relaxed font-medium">
             {noticia.subtitulo}
           </p>
         )}

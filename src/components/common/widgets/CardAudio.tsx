@@ -31,50 +31,58 @@ export const CardAudio: React.FC<CardAudioProps> = ({ id, titulo, duracao, publi
   const defaultCapa = 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=600&auto=format&fit=crop&q=80';
 
   return (
-    <div className="group relative flex flex-col bg-white rounded-xl overflow-hidden shadow-xs hover:shadow-md transition-all duration-300 border border-gray-100 flex-none w-[140px] md:w-[160px] select-none">
+    <div className="group relative flex flex-col bg-white overflow-hidden shadow-xs hover:shadow-md transition-all duration-300 border border-gray-100 w-full select-none rounded-none">
       
-      {/* Visual Frame */}
-      <div className="aspect-[16/10] w-full relative overflow-hidden bg-brand-blue">
+      {/* Image above */}
+      <div className="h-28 w-full relative overflow-hidden bg-brand-blue shrink-0">
         <img
           src={capa || defaultCapa}
           alt={titulo}
-          className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500 opacity-95"
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-95"
         />
         
-        {/* Play/Pause Hover Overlay */}
+        {/* Play/Pause hover overlay */}
         <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <button
             onClick={handlePlayClick}
-            className="w-10 h-10 flex items-center justify-center rounded-full bg-brand-yellow text-brand-blue shadow-lg hover:scale-105 active:scale-95 transition-transform duration-200"
+            className="w-9 h-9 flex items-center justify-center rounded-full bg-brand-yellow text-brand-blue shadow-lg hover:scale-105 active:scale-95 transition-transform duration-200"
             aria-label={isCurrentlyPlaying ? 'Pausar áudio' : 'Ouvir corte'}
           >
             {isCurrentlyPlaying ? (
-              <Pause className="w-4 h-4 fill-current" />
+              <Pause className="w-3.5 h-3.5 fill-current" />
             ) : (
-              <Play className="w-4 h-4 fill-current ml-0.5" />
+              <Play className="w-3.5 h-3.5 fill-current ml-0.5" />
             )}
           </button>
         </div>
         
-        {/* Duration badge positioned at bottom-left overlay */}
-        <span className="absolute bottom-2 left-2 bg-black/80 text-white text-[9px] font-black px-1.5 py-0.5 rounded tracking-wide">
+        {/* Duration badge */}
+        <span className="absolute bottom-2 left-2 bg-black/80 text-white text-2xs font-black px-1.5 py-0.5 rounded tracking-wide">
           {duracao}
         </span>
       </div>
 
-      {/* Details Box */}
-      <div className="p-3 flex flex-col justify-between flex-1 gap-1.5">
-        <h4 className="font-extrabold text-[11px] md:text-[12px] text-brand-blue line-clamp-3 leading-snug group-hover:text-brand-yellow transition-colors duration-200">
+      {/* Text below */}
+      <div className="p-3 flex flex-col justify-between flex-1 min-w-0 gap-2">
+        <h4 className="font-extrabold text-xs text-brand-blue line-clamp-2 leading-snug group-hover:text-brand-yellow transition-colors duration-200">
           {titulo}
         </h4>
-        <div className="flex justify-between items-center mt-0.5">
-          <TempoPublicacao date={publicadoEm} className="text-[9px] font-semibold text-brand-gray" />
+        <div className="flex justify-between items-center">
+          <TempoPublicacao date={publicadoEm} className="text-xs font-semibold text-brand-gray" />
           
-          {isCurrentlyPlaying && (
-            <span className="flex items-center gap-1 text-[9px] font-black text-brand-red uppercase tracking-wider">
-              <span className="w-1 h-1 rounded-full bg-brand-red animate-pulse" />
+          {isCurrentlyPlaying ? (
+            <span className="flex items-center gap-1 text-2xs font-black text-brand-red uppercase tracking-wider">
+              <span className="w-1.5 h-1.5 rounded-full bg-brand-red animate-pulse" />
               <span>Tocando</span>
             </span>
+          ) : (
+            <button
+              onClick={handlePlayClick}
+              className="text-xs font-black text-brand-blue hover:text-brand-yellow uppercase tracking-wider flex items-center gap-1 transition-colors duration-200"
+            >
+              <Play className="w-2.5 h-2.5 fill-current" />
+              Ouvir
+            </button>
           )}
         </div>
       </div>

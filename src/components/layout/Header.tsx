@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import TopBar from './TopBar';
 import Nav from './Nav';
 import { Menu } from 'lucide-react';
@@ -25,25 +26,16 @@ export const Header: React.FC<HeaderProps> = ({ onMenuToggle }) => {
           <Menu className="w-6 h-6" />
         </button>
 
-        {/* Centered Premium Typographic Logo */}
-        <Link href="/" className="flex flex-col items-center">
-          <div className="flex items-center">
-            {/* Sociedade - Dark Blue */}
-            <span className="text-3xl sm:text-4xl md:text-[45px] font-black tracking-tighter text-brand-blue font-sans leading-none">
-              Sociedade
-            </span>
-            {/* ON - Yellow/Gold with play icon embedded in O */}
-            <span className="text-3xl sm:text-4xl md:text-[45px] font-black tracking-tighter text-brand-yellow font-sans leading-none flex items-center ml-0.5">
-              {/* O as circle play icon */}
-              <span className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-brand-yellow flex items-center justify-center mx-0.5 shadow-sm">
-                <span className="w-0 h-0 border-t-[5px] border-t-transparent border-b-[5px] border-b-transparent border-l-[8px] border-l-white ml-0.5" />
-              </span>
-              <span>N</span>
-            </span>
-          </div>
-          <span className="text-[8px] md:text-[9px] tracking-[0.25em] text-brand-blue font-black uppercase mt-1">
-            A Bahia conectada em tempo real
-          </span>
+        {/* Centered Logo Image */}
+        <Link href="/" className="flex items-center">
+          <Image
+            src="/logo-sociedade.png"
+            alt="Sociedade ON"
+            width={260}
+            height={70}
+            className="h-12 md:h-14 w-auto object-contain"
+            priority
+          />
         </Link>
 
         {/* Spacer for mobile layout alignment */}

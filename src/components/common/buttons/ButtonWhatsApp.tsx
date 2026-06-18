@@ -9,7 +9,7 @@ export const ButtonWhatsApp: React.FC<ButtonWhatsAppProps> = ({ children, classN
     <a
       target="_blank"
       rel="noopener noreferrer"
-      className={`flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20ba59] text-white font-bold px-5 py-2 rounded-lg shadow-md transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 text-sm ${className}`}
+      className={`flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20ba59] text-white font-bold px-5 py-2 shadow-md transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 text-sm ${className}`}
       {...props}
     >
       <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

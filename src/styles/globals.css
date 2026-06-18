@@ -2,13 +2,19 @@
 
 @theme {
   --color-brand-blue: #0D1B4B;
-  --color-brand-yellow: #F5A800;
+  --color-brand-yellow: #E8001C;
   --color-brand-red: #E8001C;
   --color-brand-white: #FFFFFF;
   --color-brand-light: #F4F4F4;
   --color-brand-gray: #666666;
-  
+
   --font-sans: 'Outfit', 'Inter', system-ui, sans-serif;
+
+  /* Typography scale */
+  --text-2xs: 0.625rem;
+  --text-2xs--line-height: 1rem;
+  --text-3xs: 0.5625rem;
+  --text-3xs--line-height: 0.75rem;
 }
 
 :root {
@@ -33,23 +39,39 @@ body {
 ::-webkit-scrollbar {
   width: 8px;
 }
+
 ::-webkit-scrollbar-track {
   background: #F4F4F4;
 }
+
 ::-webkit-scrollbar-thumb {
   background: #D1D5DB;
   border-radius: 4px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: #9CA3AF;
+}
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
 /* Ao Vivo blink animation */
 @keyframes pulse-live {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 1;
     transform: scale(1);
   }
+
   50% {
     opacity: 0.3;
     transform: scale(0.9);
@@ -64,15 +86,19 @@ body {
   0% {
     transform: translateY(-100%);
   }
+
   100% {
     transform: translateY(0);
   }
 }
 
 @keyframes bounceSlow {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-6px);
   }
@@ -87,6 +113,7 @@ body {
     opacity: 0;
     transform: translateY(8px) scale(0.95);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0) scale(1);
@@ -97,4 +124,17 @@ body {
   animation: floatIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
+@keyframes marquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-33.33%, 0, 0);
+  }
+}
 
+.animate-marquee {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: marquee 10s linear infinite;
+}

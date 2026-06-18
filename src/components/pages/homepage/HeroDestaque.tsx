@@ -32,7 +32,7 @@ export const HeroDestaque: React.FC<HeroDestaqueProps> = ({ noticia }) => {
   };
 
   return (
-    <div className="relative rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-500 h-[400px] md:h-[480px] lg:h-full group bg-brand-blue flex flex-col justify-between select-none">
+    <div className="relative overflow-hidden shadow-md hover:shadow-xl transition-all duration-500 h-[400px] md:h-[480px] lg:h-full group bg-brand-blue flex flex-col justify-between select-none">
       
       {/* Background Image with Zoom effect */}
       <div className="absolute inset-0 z-0">
@@ -53,14 +53,14 @@ export const HeroDestaque: React.FC<HeroDestaqueProps> = ({ noticia }) => {
             ...noticia.editoria,
             cor: '#0D1B4B'
           }}
-          className="shadow-md text-[10px] font-black"
+          className="shadow-md"
         />
       </div>
 
       {/* Bottom Section: Text Overlays & Controls */}
       <div className="p-6 md:p-8 relative z-10 w-full flex flex-col gap-3.5">
         <Link href={href} className="group/title">
-          <h1 className="text-xl sm:text-2xl md:text-[34px] font-black text-white group-hover/title:text-brand-yellow transition-colors leading-tight tracking-tight drop-shadow-sm">
+          <h1 className="text-xl sm:text-2xl md:text-4xl font-black text-white group-hover/title:text-brand-yellow transition-colors leading-tight tracking-tight drop-shadow-sm">
             {noticia.titulo}
           </h1>
         </Link>
@@ -74,7 +74,7 @@ export const HeroDestaque: React.FC<HeroDestaqueProps> = ({ noticia }) => {
           {noticia.audioUrl ? (
             <button
               onClick={handleAudioPlay}
-              className="flex items-center gap-2 border border-white/30 bg-black/40 hover:bg-white hover:text-brand-blue text-white rounded font-black tracking-wider uppercase text-[10px] py-2.5 px-4.5 transition-all duration-300 transform active:scale-95 cursor-pointer"
+              className="flex items-center gap-2 border border-white/30 bg-black/40 hover:bg-white hover:text-brand-blue text-white rounded font-black tracking-wider uppercase text-2xs py-2.5 px-4.5 transition-all duration-300 transform active:scale-95 cursor-pointer"
             >
               {isCurrentlyPlaying ? (
                 <Pause className="w-3.5 h-3.5 fill-current" />
@@ -87,7 +87,7 @@ export const HeroDestaque: React.FC<HeroDestaqueProps> = ({ noticia }) => {
             <div />
           )}
 
-          <span className="text-[11px] font-bold text-white/70 tracking-wide">
+          <span className="text-xs font-bold text-white/70 tracking-wide">
             há 25 minutos
           </span>
         </div>

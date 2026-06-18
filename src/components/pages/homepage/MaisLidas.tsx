@@ -26,57 +26,29 @@ export const MaisLidas: React.FC<MaisLidasProps> = ({ noticias }) => {
         </h2>
       </div>
 
-      {/* List: 2 Columns */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2.5">
-        {/* Left column (items 1, 2, 3) */}
-        <div className="flex flex-col gap-2.5">
-          {mockTitles.slice(0, 3).map((item, idx) => {
-            const badgeNum = idx + 1;
+      {/* List: 1 Column (one below the other) */}
+      <div className="flex flex-col gap-3.5">
+        {mockTitles.map((item, idx) => {
+          const badgeNum = idx + 1;
 
-            return (
-              <Link
-                key={item.id}
-                href="/#"
-                className="group flex items-start text-left"
-              >
-                {/* Dark blue square number badge */}
-                <span className="w-6 h-6 bg-brand-blue text-white text-[10px] font-black rounded-xs flex items-center justify-center shrink-0 mr-3 mt-0.5 shadow-sm font-mono">
-                  {badgeNum}
-                </span>
-                <div className="flex flex-col gap-0.5 min-w-0">
-                  <h3 className="font-extrabold text-[11px] md:text-[12px] text-brand-blue group-hover:text-brand-yellow transition-colors leading-snug line-clamp-3">
-                    {item.titulo}
-                  </h3>
-                </div>
-              </Link>
-            );
-          })}
-        </div>
-
-        {/* Right column (items 4, 5, 6) */}
-        <div className="flex flex-col gap-2.5">
-          {mockTitles.slice(3, 6).map((item, idx) => {
-            const badgeNum = idx + 4;
-
-            return (
-              <Link
-                key={item.id}
-                href="/#"
-                className="group flex items-start text-left"
-              >
-                {/* Dark blue square number badge */}
-                <span className="w-6 h-6 bg-brand-blue text-white text-[10px] font-black rounded-xs flex items-center justify-center shrink-0 mr-3 mt-0.5 shadow-sm font-mono">
-                  {badgeNum}
-                </span>
-                <div className="flex flex-col gap-0.5 min-w-0">
-                  <h3 className="font-extrabold text-[11px] md:text-[12px] text-brand-blue group-hover:text-brand-yellow transition-colors leading-snug line-clamp-3">
-                    {item.titulo}
-                  </h3>
-                </div>
-              </Link>
-            );
-          })}
-        </div>
+          return (
+            <Link
+              key={item.id}
+              href="/#"
+              className="group flex items-center text-left"
+            >
+              {/* Dark blue square number badge */}
+              <span className="w-6 h-6 bg-brand-blue text-white text-2xs font-black rounded-xs flex items-center justify-center shrink-0 mr-3 shadow-sm font-mono">
+                {badgeNum}
+              </span>
+              <div className="flex flex-col gap-0.5 min-w-0">
+                <h3 className="font-extrabold text-sm text-brand-blue group-hover:text-brand-yellow transition-colors leading-snug line-clamp-3">
+                  {item.titulo.trim()}
+                </h3>
+              </div>
+            </Link>
+          );
+        })}
       </div>
     </div>
   );
