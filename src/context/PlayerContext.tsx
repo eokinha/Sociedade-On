@@ -12,6 +12,8 @@ interface PlayerContextType {
   changeVolume: (vol: number) => void;
   isVideoFloating: boolean;
   setIsVideoFloating: (floating: boolean) => void;
+  isVideoCollapsed: boolean;
+  setIsVideoCollapsed: (collapsed: boolean) => void;
   isAudioPlayerVisible: boolean;
   setIsAudioPlayerVisible: (visible: boolean) => void;
 }
@@ -25,6 +27,7 @@ export const PlayerProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const [isLive, setIsLive] = useState(false);
   const [volume, setVolume] = useState(0.8);
   const [isVideoFloating, setIsVideoFloating] = useState(false);
+  const [isVideoCollapsed, setIsVideoCollapsed] = useState(false);
   const [isAudioPlayerVisible, setIsAudioPlayerVisible] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -125,6 +128,8 @@ export const PlayerProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         changeVolume,
         isVideoFloating,
         setIsVideoFloating,
+        isVideoCollapsed,
+        setIsVideoCollapsed,
         isAudioPlayerVisible,
         setIsAudioPlayerVisible,
       }}

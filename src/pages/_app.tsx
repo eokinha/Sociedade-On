@@ -32,7 +32,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="twitter:description" content="Acompanhe as últimas notícias de Salvador, Bahia e do Brasil. Ouça a Rádio Sociedade 102.5 FM ao vivo." key="twitter:description" />
         <meta name="twitter:image" content="/placeholder.png" key="twitter:image" />
       </Head>
-      <div className="flex flex-col min-h-screen bg-brand-light">
+      <div className="flex flex-col min-h-screen bg-brand-light w-full overflow-x-hidden">
         {/* Header (TopBar + Logo + Nav) */}
         <Header onMenuToggle={mobileMenu.toggle} />
 

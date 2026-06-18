@@ -14,6 +14,7 @@ export const Flutuantes: React.FC = () => {
     changeVolume,
     pauseAudio,
     isVideoFloating,
+    isVideoCollapsed,
     isAudioPlayerVisible,
     setIsAudioPlayerVisible,
   } = usePlayer();
@@ -32,15 +33,7 @@ export const Flutuantes: React.FC = () => {
   const isPlayerVisible = hasAudio && isAudioPlayerVisible;
 
   const getWhatsAppBottomClass = () => {
-    if (isVideoFloating) {
-      if (isPlayerVisible) {
-        return 'bottom-[260px] md:bottom-[330px]';
-      } else {
-        return 'bottom-[180px] md:bottom-[250px]';
-      }
-    } else {
-      return isPlayerVisible ? 'bottom-24' : 'bottom-6';
-    }
+    return isPlayerVisible ? 'bottom-24' : 'bottom-6';
   };
 
   return (
