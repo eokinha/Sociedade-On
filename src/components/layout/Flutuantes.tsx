@@ -4,22 +4,19 @@ import { usePlayer } from '../../hooks/usePlayer';
 import BadgeAoVivo from '../common/widgets/BadgeAoVivo';
 
 export const Flutuantes: React.FC = () => {
-  const { isPlaying, currentAudioUrl, audioTitle, isLive, volume, togglePlay, changeVolume, pauseAudio } = usePlayer();
-  const [showPlayer, setShowPlayer] = useState(true);
-
-  // Automatically show the player again if a new audio starts playing
-  useEffect(() => {
-    if (isPlaying) {
-      setShowPlayer(true);
-    }
-  }, [isPlaying]);
-
-  // Automatically show the player again if the audio URL changes
-  useEffect(() => {
-    if (currentAudioUrl) {
-      setShowPlayer(true);
-    }
-  }, [currentAudioUrl]);
+  const {
+    isPlaying,
+    currentAudioUrl,
+    audioTitle,
+    isLive,
+    volume,
+    togglePlay,
+    changeVolume,
+    pauseAudio,
+    isVideoFloating,
+    isAudioPlayerVisible,
+    setIsAudioPlayerVisible,
+  } = usePlayer();
 
   const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     changeVolume(parseFloat(e.target.value));
@@ -28,11 +25,23 @@ export const Flutuantes: React.FC = () => {
   const handleClosePlayer = (e: React.MouseEvent) => {
     e.preventDefault();
     pauseAudio();
-    setShowPlayer(false);
+    setIsAudioPlayerVisible(false);
   };
 
   const hasAudio = !!currentAudioUrl;
-  const isPlayerVisible = hasAudio && showPlayer;
+  const isPlayerVisible = hasAudio && isAudioPlayerVisible;
+
+  const getWhatsAppBottomClass = () => {
+    if (isVideoFloating) {
+      if (isPlayerVisible) {
+        return 'bottom-[260px] md:bottom-[330px]';
+      } else {
+        return 'bottom-[180px] md:bottom-[250px]';
+      }
+    } else {
+      return isPlayerVisible ? 'bottom-24' : 'bottom-6';
+    }
+  };
 
   return (
     <>
@@ -43,7 +52,7 @@ export const Flutuantes: React.FC = () => {
         rel="noopener noreferrer"
         aria-label="Fale conosco no WhatsApp"
         className={`fixed right-6 z-40 bg-[#25D366] hover:bg-[#20ba59] text-white p-4 rounded-full shadow-2xl hover:scale-115 active:scale-95 transition-all duration-300 flex items-center justify-center ${
-          isPlayerVisible ? 'bottom-24' : 'bottom-6'
+          getWhatsAppBottomClass()
         }`}
       >
         <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

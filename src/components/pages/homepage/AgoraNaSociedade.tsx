@@ -1,13 +1,59 @@
-import React from 'react';
-import { Play, Pause } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Play, Pause, X } from 'lucide-react';
 import { usePlayer } from '../../../hooks/usePlayer';
 
 export const AgoraNaSociedade: React.FC = () => {
-  const { playAudio, pauseAudio, isPlaying, currentAudioUrl } = usePlayer();
+  const {
+    playAudio,
+    pauseAudio,
+    isPlaying,
+    currentAudioUrl,
+    isVideoFloating,
+    setIsVideoFloating,
+    isAudioPlayerVisible,
+  } = usePlayer();
+
+  const [isFloating, setIsFloating] = useState(false);
+  const [isDismissed, setIsDismissed] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const liveUrl = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3';
   const isCurrentLive = currentAudioUrl === liveUrl;
   const isCurrentlyPlaying = isCurrentLive && isPlaying;
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) {
+          if (!isDismissed) {
+            setIsFloating(true);
+            setIsVideoFloating(true);
+          }
+        } else {
+          setIsFloating(false);
+          setIsVideoFloating(false);
+          setIsDismissed(false); // Reset dismissed state when it comes back into view
+        }
+      },
+      {
+        threshold: 0.1,
+      }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [isDismissed, setIsVideoFloating]);
+
+  useEffect(() => {
+    return () => {
+      setIsVideoFloating(false);
+    };
+  }, [setIsVideoFloating]);
 
   const handleLiveToggle = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -16,6 +62,14 @@ export const AgoraNaSociedade: React.FC = () => {
     } else {
       playAudio(liveUrl, 'Rádio Sociedade - 740 AM | 102.5 FM (Ao Vivo)', true);
     }
+  };
+
+  const handleCloseFloat = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDismissed(true);
+    setIsFloating(false);
+    setIsVideoFloating(false);
   };
 
   const currentProgram = {
@@ -39,15 +93,34 @@ export const AgoraNaSociedade: React.FC = () => {
       </div>
 
       {/* Embedded Video Player */}
-      <div className="relative w-full overflow-hidden bg-black" style={{ aspectRatio: '16/9' }}>
-        <iframe
-          src="https://www.sociedadeonline.com/Streaming/Video/index.html"
-          title="Sociedade Online - Ao Vivo"
-          className="w-full h-full border-0"
-          allow="autoplay; fullscreen; picture-in-picture"
-          allowFullScreen
-          scrolling="no"
-        />
+      <div ref={containerRef} className="relative w-full bg-black overflow-visible" style={{ aspectRatio: '16/9' }}>
+        <div
+          className={
+            isFloating
+              ? `fixed ${
+                  isAudioPlayerVisible ? 'bottom-24' : 'bottom-6'
+                } right-6 z-50 w-64 sm:w-80 md:w-96 aspect-video bg-black rounded-lg shadow-2xl border border-white/10 overflow-hidden animate-float-in`
+              : "absolute inset-0 w-full h-full"
+          }
+        >
+          {isFloating && (
+            <button
+              onClick={handleCloseFloat}
+              className="absolute top-2 right-2 z-50 bg-black/60 hover:bg-black/85 text-white rounded-full p-1.5 transition-colors cursor-pointer border border-white/10 flex items-center justify-center"
+              aria-label="Fechar vídeo flutuante"
+            >
+              <X className="w-3.5 h-3.5" />
+            </button>
+          )}
+          <iframe
+            src="https://www.sociedadeonline.com/Streaming/Video/index.html"
+            title="Sociedade Online - Ao Vivo"
+            className="w-full h-full border-0"
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowFullScreen
+            scrolling="no"
+          />
+        </div>
       </div>
 
       {/* Main card details */}

@@ -10,6 +10,10 @@ interface PlayerContextType {
   pauseAudio: () => void;
   togglePlay: () => void;
   changeVolume: (vol: number) => void;
+  isVideoFloating: boolean;
+  setIsVideoFloating: (floating: boolean) => void;
+  isAudioPlayerVisible: boolean;
+  setIsAudioPlayerVisible: (visible: boolean) => void;
 }
 
 const PlayerContext = createContext<PlayerContextType | undefined>(undefined);
@@ -20,7 +24,16 @@ export const PlayerProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const [audioTitle, setAudioTitle] = useState<string>('');
   const [isLive, setIsLive] = useState(false);
   const [volume, setVolume] = useState(0.8);
+  const [isVideoFloating, setIsVideoFloating] = useState(false);
+  const [isAudioPlayerVisible, setIsAudioPlayerVisible] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  // Automatically show the audio player if playing or url changes
+  useEffect(() => {
+    if (isPlaying || currentAudioUrl) {
+      setIsAudioPlayerVisible(true);
+    }
+  }, [isPlaying, currentAudioUrl]);
 
   useEffect(() => {
     // Instantiate audio object on client side
@@ -110,6 +123,10 @@ export const PlayerProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         pauseAudio,
         togglePlay,
         changeVolume,
+        isVideoFloating,
+        setIsVideoFloating,
+        isAudioPlayerVisible,
+        setIsAudioPlayerVisible,
       }}
     >
       {children}
