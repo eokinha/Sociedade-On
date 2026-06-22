@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import path from "path";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
@@ -13,6 +14,9 @@ const nextConfig: NextConfig = {
         hostname: '**.unsplash.com',
       },
     ],
+  },
+  turbopack: {
+    root: path.resolve(process.cwd()),
   },
 };
 

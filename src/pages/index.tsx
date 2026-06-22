@@ -6,6 +6,7 @@ import { Editoria } from '@/types/editoria';
 import { Programa } from '@/lib/directus';
 import HeroDestaque from '@/components/pages/homepage/HeroDestaque';
 import AgoraNaSociedade from '@/components/pages/homepage/AgoraNaSociedade';
+import NoticiasCarrossel from '@/components/pages/homepage/NoticiasCarrossel';
 import UltimasNoticias from '@/components/pages/homepage/UltimasNoticias';
 import EditoriaSection from '@/components/pages/homepage/EditoriaSection';
 import CortesRadio from '@/components/pages/homepage/CortesRadio';
@@ -14,6 +15,7 @@ import SigaSociedade from '@/components/pages/homepage/SigaSociedade';
 import Programacao from '@/components/pages/homepage/Programacao';
 import BannerAd from '@/components/common/widgets/BannerAd';
 import WidgetClima from '@/components/common/widgets/WidgetClima';
+import EspeciaisSidebar from '@/components/common/widgets/EspeciaisSidebar';
 
 interface HomeProps {
   noticias: Noticia[];
@@ -34,9 +36,12 @@ export default function Home({ noticias, editorias, programas, currentUrl }: Hom
     noticiasPorEditoria[slug].push(n);
   });
 
-  // Editorias to display as sections (only those with content)
+  // Editorias to display as sections (only those with content, excluding economy and entertainment)
   const editoriasComConteudo = editorias.filter(
-    (e) => noticiasPorEditoria[e.slug] && noticiasPorEditoria[e.slug].length > 0
+    (e) => noticiasPorEditoria[e.slug] && 
+           noticiasPorEditoria[e.slug].length > 0 &&
+           e.slug !== 'economia' &&
+           e.slug !== 'entretenimento'
   );
 
   return (
@@ -58,8 +63,9 @@ export default function Home({ noticias, editorias, programas, currentUrl }: Hom
             <div className="lg:col-span-2 flex flex-col">
               <HeroDestaque noticia={highlightNews} />
             </div>
-            <div className="lg:col-span-1 flex flex-col">
+            <div className="lg:col-span-1 flex flex-col gap-6">
               <AgoraNaSociedade />
+              <NoticiasCarrossel noticias={otherNews} />
             </div>
           </div>
         )}
@@ -96,6 +102,7 @@ export default function Home({ noticias, editorias, programas, currentUrl }: Hom
             <MaisLidas noticias={noticias} />
             <BannerAd formato="retangulo" />
             <WidgetClima variant="sidebar" />
+            <EspeciaisSidebar noticias={noticias} />
             <BannerAd formato="half-page" />
             <SigaSociedade />
           </aside>

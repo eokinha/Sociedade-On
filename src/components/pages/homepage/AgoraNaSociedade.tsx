@@ -163,38 +163,7 @@ export const AgoraNaSociedade: React.FC = () => {
         </div>
       </div>
 
-      {/* Main card details */}
-      <div className="p-5 flex flex-col justify-between flex-1 gap-4">
 
-        {/* Presenter Texts */}
-        <div className="flex flex-col gap-1">
-          <h2 className="text-lg font-black text-white leading-tight">
-            {currentProgram.titulo}
-          </h2>
-          <p className="text-xs text-gray-300 font-semibold">
-            {currentProgram.apresentador}
-          </p>
-          <p className="text-xs text-white/80 leading-relaxed font-normal mt-1.5">
-            {currentProgram.descricao}
-          </p>
-        </div>
-
-        {/* Card Specific Action Buttons */}
-        <div className="flex flex-col gap-2.5 pt-1.5">
-          <button
-            onClick={handleLiveToggle}
-            className="w-full bg-brand-yellow hover:bg-[#C0001A] text-white font-black py-2.5 px-4 flex items-center justify-center gap-2 transition-colors duration-200 active:scale-95 cursor-pointer text-xs uppercase tracking-wide"
-          >
-            {isCurrentlyPlaying ? (
-              <Pause className="w-3.5 h-3.5 fill-current" />
-            ) : (
-              <Play className="w-3.5 h-3.5 fill-current ml-0.5" />
-            )}
-            <span>{isCurrentlyPlaying ? 'PAUSAR RÁDIO' : 'OUÇA A RÁDIO AO VIVO'}</span>
-          </button>
-        </div>
-
-      </div>
 
       {/* Expand Button when Collapsed */}
       {isFloating && (
