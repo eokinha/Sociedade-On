@@ -16,6 +16,7 @@ import Programacao from '@/components/pages/homepage/Programacao';
 import BannerAd from '@/components/common/widgets/BannerAd';
 import WidgetClima from '@/components/common/widgets/WidgetClima';
 import EspeciaisSidebar from '@/components/common/widgets/EspeciaisSidebar';
+import WidgetWhatsapp from '@/components/common/widgets/WidgetWhatsapp';
 
 interface HomeProps {
   noticias: Noticia[];
@@ -98,13 +99,14 @@ export default function Home({ noticias, editorias, programas, currentUrl }: Hom
           </div>
 
           {/* Sidebar */}
-          <aside className="lg:col-span-4 flex flex-col gap-6 lg:border-l lg:border-gray-100 lg:pl-8">
+          <aside className="lg:col-span-4 lg:sticky lg:top-6 lg:self-start flex flex-col gap-6 lg:border-l lg:border-gray-100 lg:pl-8">
             <MaisLidas noticias={noticias} />
             <BannerAd formato="retangulo" />
             <WidgetClima variant="sidebar" />
             <EspeciaisSidebar noticias={noticias} />
             <BannerAd formato="half-page" />
             <SigaSociedade />
+            <WidgetWhatsapp />
           </aside>
         </div>
 
