@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface BannerAdProps {
-  formato: 'horizontal-lg' | 'horizontal-sm' | 'retangulo' | 'half-page';
+  formato: 'horizontal-lg' | 'horizontal-sm' | 'retangulo' | 'half-page' | 'retangulo-lg';
   className?: string;
 }
 
@@ -9,6 +9,7 @@ const dimensoes = {
   'horizontal-lg': { desktop: '728×90', mobile: '320×100', desktopClass: 'h-[90px]', mobileClass: 'h-[100px]' },
   'horizontal-sm': { desktop: '728×90', mobile: '320×100', desktopClass: 'h-[90px]', mobileClass: 'h-[100px]' },
   'retangulo': { desktop: '300×250', mobile: '300×250', desktopClass: 'h-[250px] max-w-[300px]', mobileClass: 'h-[250px] max-w-[300px]' },
+  'retangulo-lg': { desktop: '350×250', mobile: '300×250', desktopClass: 'h-[250px] max-w-[350px]', mobileClass: 'h-[250px] max-w-[300px]' },
   'half-page': { desktop: '300×600', mobile: '300×600', desktopClass: 'h-[600px] max-w-[300px]', mobileClass: 'h-[600px] max-w-[300px]' },
 };
 

@@ -7,6 +7,7 @@ import { ArrowLeft, Search } from 'lucide-react';
 import { getItems } from '@/lib/directus';
 import { Noticia } from '@/types/noticia';
 import CardNoticia from '@/components/common/widgets/CardNoticia';
+import Paginacao from '@/components/common/widgets/Paginacao';
 
 interface BuscaPageProps {
   query: string;
@@ -17,6 +18,16 @@ interface BuscaPageProps {
 export default function BuscaPage({ query, noticias = [], currentUrl }: BuscaPageProps) {
   const router = useRouter();
   const [inputValue, setInputValue] = useState(query);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 15;
+  const totalPages = Math.ceil(noticias.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const paginatedNoticias = noticias.slice(startIndex, startIndex + itemsPerPage);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -78,16 +89,21 @@ export default function BuscaPage({ query, noticias = [], currentUrl }: BuscaPag
         </div>
 
         {/* Results Showcase */}
-        {noticias.length > 0 ? (
+        {paginatedNoticias.length > 0 ? (
           <div className="flex flex-col gap-6">
             <p className="text-[11px] font-bold text-brand-gray uppercase tracking-widest text-left">
               Foram encontradas <span className="text-brand-blue font-black">{noticias.length}</span> notícias relacionadas:
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-              {noticias.map((item) => (
+              {paginatedNoticias.map((item) => (
                 <CardNoticia key={item.id} noticia={item} layout="vertical" showExcerpt={true} />
               ))}
             </div>
+            <Paginacao
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={handlePageChange}
+            />
           </div>
         ) : (
           <div className="bg-white p-16 text-center border border-gray-100 shadow-xs flex flex-col items-center gap-4">

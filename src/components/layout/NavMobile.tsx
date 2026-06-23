@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { X } from 'lucide-react';
 import SearchInput from '../common/inputs/SearchInput';
@@ -26,6 +27,8 @@ export const NavMobile: React.FC<NavMobileProps> = ({ isOpen, onClose }) => {
     { nome: 'Economia', path: '/economia' },
     { nome: 'Esportes', path: '/esportes' },
     { nome: 'Entretenimento', path: '/entretenimento' },
+    { nome: 'Programação', path: '/programacao' },
+    { nome: 'Promoções', path: '/promocoes' },
     { nome: 'Comercial', path: '/comercial' },
   ];
 
@@ -54,9 +57,16 @@ export const NavMobile: React.FC<NavMobileProps> = ({ isOpen, onClose }) => {
         <div>
           {/* Header Area */}
           <div className="flex justify-between items-center mb-6">
-            <span className="text-xl font-black tracking-tighter">
-              SOCIEDADE<span className="text-brand-yellow">ON</span>
-            </span>
+            <Link href="/" className="flex items-center select-none" onClick={onClose}>
+              <Image
+                src="/logo-sociedade.png"
+                alt="Sociedade ON"
+                width={130}
+                height={35}
+                className="h-7 w-auto object-contain brightness-0 invert"
+                priority
+              />
+            </Link>
             <button
               onClick={onClose}
               className="text-gray-300 hover:text-brand-yellow p-1"

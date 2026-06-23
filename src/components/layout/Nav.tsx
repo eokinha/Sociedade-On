@@ -67,15 +67,16 @@ export const Nav: React.FC<NavProps> = ({ onMenuToggle }) => {
     }
   };
 
-  const menuItems = [
+  const menuItems: { nome: string; path: string; hasDropdown?: boolean }[] = [
     { nome: 'Últimas Notícias', path: '/ultimas-noticias' },
-    { nome: 'Salvador', path: '/salvador', hasDropdown: true },
+    { nome: 'Salvador', path: '/salvador' },
     { nome: 'Bahia', path: '/bahia' },
     { nome: 'Brasil', path: '/brasil' },
     { nome: 'Política', path: '/politica' },
     { nome: 'Economia', path: '/economia' },
     { nome: 'Esportes', path: '/esportes' },
-    { nome: 'Entretenimento', path: '/entretenimento', hasDropdown: true },
+    { nome: 'Entretenimento', path: '/entretenimento' },
+    { nome: 'Promoções', path: '/promocoes' },
     { nome: 'Comercial', path: '/comercial' },
   ];
 

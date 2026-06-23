@@ -26,8 +26,8 @@ interface HomeProps {
 }
 
 export default function Home({ noticias, editorias, programas, currentUrl }: HomeProps) {
-  const highlightNews = noticias[0];
-  const otherNews = noticias.slice(1);
+  const highlightNews = noticias.slice(0, 4);
+  const otherNews = noticias.slice(4);
 
   // Group news by editoria slug
   const noticiasPorEditoria: Record<string, Noticia[]> = {};
@@ -59,10 +59,10 @@ export default function Home({ noticias, editorias, programas, currentUrl }: Hom
 
       <div className="flex flex-col gap-6">
         {/* 1. Hero: Destaque principal + Agora na Sociedade */}
-        {highlightNews && (
+        {highlightNews.length > 0 && (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
             <div className="lg:col-span-2 flex flex-col">
-              <HeroDestaque noticia={highlightNews} />
+              <HeroDestaque noticias={highlightNews} />
             </div>
             <div className="lg:col-span-1 flex flex-col gap-6">
               <AgoraNaSociedade />

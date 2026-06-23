@@ -1,6 +1,7 @@
 import { Noticia } from '../types/noticia';
 import { Editoria } from '../types/editoria';
 import { Podcast } from '../types/podcast';
+import { Promocao } from '../types/promocao';
 
 const DIRECTUS_URL = process.env.NEXT_PUBLIC_DIRECTUS_URL || '';
 
@@ -605,6 +606,57 @@ export const mockPodcasts: Podcast[] = [
   }
 ];
 
+export const mockPromocoes: Promocao[] = [
+  {
+    id: 'prm1',
+    titulo: 'Show de Prêmios Rádio Sociedade',
+    descricao: 'Participe e concorra a um Home Theater completo para curtir os jogos e filmes com alta qualidade de som.',
+    conteudo: 'A Rádio Sociedade preparou um super sorteio para seus ouvintes fiéis! Iremos presentear um ganhador sortudo com um Home Theater completo de última geração. Para participar, basta preencher o formulário abaixo com os seus dados de contato corretos. O sorteio será realizado ao vivo durante o programa Fim de Tarde do dia 15 de Julho.',
+    slug: 'show-de-premios-radio-sociedade',
+    imagem: 'https://images.unsplash.com/photo-1545128485-c400e7702796?w=800&auto=format&fit=crop&q=80',
+    dataInicio: '2026-06-20',
+    dataFim: '2026-07-15',
+    status: 'ativa',
+    premio: 'Home Theater Completo'
+  },
+  {
+    id: 'prm2',
+    titulo: 'Ingressos para o Show de Ivete Sangalo',
+    descricao: 'Quer ver a rainha do Axé de perto? Concorra a um par de ingressos VIP para o show exclusivo em Salvador.',
+    conteudo: 'A Sociedade ON te leva para o maior show do ano! Ivete Sangalo se apresenta em Salvador e você pode assistir de camarote com um acompanhante. Para participar do sorteio, preencha as informações no formulário. Fique ligado na programação da Rádio Sociedade 102.5 FM para saber o resultado no dia 5 de Julho.',
+    slug: 'ingressos-show-ivete-sangalo',
+    imagem: 'https://images.unsplash.com/photo-1506157786151-b8491531f063?w=800&auto=format&fit=crop&q=80',
+    dataInicio: '2026-06-18',
+    dataFim: '2026-07-04',
+    status: 'ativa',
+    premio: 'Par de Ingressos VIP'
+  },
+  {
+    id: 'prm3',
+    titulo: 'Kit Churrasco do Fim de Semana',
+    descricao: 'Concorra a um kit completo com carnes nobres, carvão, avental personalizado e uma caixa térmica cheia.',
+    conteudo: 'O churrasco do final de semana é por nossa conta! Concorra a um kit churrasco completo contendo carnes selecionadas, acessórios exclusivos da rádio e bebidas. Preencha seus dados no formulário abaixo e participe. O sorteio acontece toda sexta-feira às 11h.',
+    slug: 'kit-churrasco-fim-de-semana',
+    imagem: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800&auto=format&fit=crop&q=80',
+    dataInicio: '2026-06-10',
+    dataFim: '2026-06-26',
+    status: 'ativa',
+    premio: 'Kit Churrasco Completo'
+  },
+  {
+    id: 'prm4',
+    titulo: 'Camisa Oficial do Esporte Clube Bahia Autografada',
+    descricao: 'Promoção encerrada. Confira o ganhador do sorteio da camisa oficial autografada por todo o elenco tricolor.',
+    conteudo: 'Seja o dono do manto sagrado tricolor autografado pelos craques do Bahia! Esta promoção está encerrada e o grande sorteado foi o ouvinte Marcos Silva, morador do bairro do Cabula, em Salvador. Agradecemos a participação de todos e fiquem de olho nas novas promoções do site!',
+    slug: 'camisa-oficial-bahia-autografada',
+    imagem: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=800&auto=format&fit=crop&q=80',
+    dataInicio: '2026-05-01',
+    dataFim: '2026-05-30',
+    status: 'encerrada',
+    premio: 'Camisa Oficial do Bahia Autografada'
+  }
+];
+
 // Helper to filter items in-memory for mocking
 export async function getItems<T>(collection: string, query?: any): Promise<T[]> {
   if (DIRECTUS_URL) {
@@ -656,6 +708,10 @@ export async function getItems<T>(collection: string, query?: any): Promise<T[]>
     return mockProgramacao as unknown as T[];
   }
 
+  if (collection === 'promocoes') {
+    return mockPromocoes as unknown as T[];
+  }
+
   return [] as T[];
 }
 
@@ -686,6 +742,11 @@ export async function getItem<T>(collection: string, idOrSlug: string): Promise<
   if (collection === 'podcasts') {
     const podcast = mockPodcasts.find(p => p.id === idOrSlug);
     return podcast ? (podcast as unknown as T) : null;
+  }
+
+  if (collection === 'promocoes') {
+    const promocao = mockPromocoes.find(p => p.id === idOrSlug || p.slug === idOrSlug);
+    return promocao ? (promocao as unknown as T) : null;
   }
 
   return null;

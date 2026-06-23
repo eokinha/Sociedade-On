@@ -91,12 +91,6 @@ export const NoticiasCarrossel: React.FC<NoticiasCarrosselProps> = ({ noticias }
         <h3 className="text-sm sm:text-base font-black text-white group-hover:text-brand-yellow transition-colors leading-snug tracking-tight drop-shadow-sm line-clamp-3">
           {currentNoticia.titulo}
         </h3>
-        
-        {currentNoticia.subtitulo && (
-          <p className="text-3xs text-white/75 line-clamp-2 leading-relaxed hidden sm:block font-medium drop-shadow-2xs">
-            {currentNoticia.subtitulo}
-          </p>
-        )}
       </Link>
 
       {/* Progress controls (dots and buttons) at absolute bottom */}

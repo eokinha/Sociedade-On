@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { GetServerSideProps } from 'next';
-import { ArrowLeft, Play, Pause, Calendar, Share2 } from 'lucide-react';
+import { ArrowLeft, Play, Pause, Calendar, Share2, Volume2, Settings } from 'lucide-react';
 import { getItems, getItem } from '@/lib/directus';
 import { Noticia } from '@/types/noticia';
 import { Editoria } from '@/types/editoria';
@@ -12,6 +12,8 @@ import CardNoticia from '@/components/common/widgets/CardNoticia';
 import ButtonPrimary from '@/components/common/buttons/ButtonPrimary';
 import { usePlayer } from '@/hooks/usePlayer';
 import { getImageUrl } from '@/lib/directus';
+import BannerAd from '@/components/common/widgets/BannerAd';
+import Paginacao from '@/components/common/widgets/Paginacao';
 
 interface DynamicPageProps {
   type: 'category' | 'article';
@@ -35,6 +37,7 @@ export default function DynamicPage({
   currentUrl
 }: DynamicPageProps) {
   const { playAudio, pauseAudio, isPlaying, currentAudioUrl } = usePlayer();
+  const [currentPage, setCurrentPage] = useState(1);
 
   if (type === 'category' && editoria) {
     return (
@@ -56,6 +59,9 @@ export default function DynamicPage({
             <span className="text-brand-blue font-black">{editoria.nome}</span>
           </div>
 
+          {/* Banner 728x90 below Header */}
+          <BannerAd formato="horizontal-lg" className="mb-6" />
+
           {/* Category Header */}
           <div className="border-b border-gray-200 pb-4 mb-8">
             <span
@@ -71,20 +77,39 @@ export default function DynamicPage({
           </div>
 
           {/* News List */}
-          {noticias.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {noticias.map((item) => (
-                <CardNoticia key={item.id} noticia={item} layout="vertical" showExcerpt={true} />
-              ))}
-            </div>
-          ) : (
-            <div className="bg-white p-12 text-center border border-gray-100 shadow-xs">
-              <p className="text-brand-gray font-bold">Nenhuma notícia publicada nesta editoria ainda.</p>
-              <Link href="/" className="mt-4 inline-block text-xs font-black text-brand-blue hover:text-brand-yellow uppercase tracking-wider">
-                Voltar para a Home
-              </Link>
-            </div>
-          )}
+          {(() => {
+            const itemsPerPage = 15;
+            const totalPages = Math.ceil(noticias.length / itemsPerPage);
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const paginatedNoticias = noticias.slice(startIndex, startIndex + itemsPerPage);
+
+            const handlePageChange = (page: number) => {
+              setCurrentPage(page);
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+
+            return paginatedNoticias.length > 0 ? (
+              <div className="flex flex-col gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {paginatedNoticias.map((item) => (
+                    <CardNoticia key={item.id} noticia={item} layout="vertical" showExcerpt={true} />
+                  ))}
+                </div>
+                <Paginacao
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  onPageChange={handlePageChange}
+                />
+              </div>
+            ) : (
+              <div className="bg-white p-12 text-center border border-gray-100 shadow-xs">
+                <p className="text-brand-gray font-bold">Nenhuma notícia publicada nesta editoria ainda.</p>
+                <Link href="/" className="mt-4 inline-block text-xs font-black text-brand-blue hover:text-brand-yellow uppercase tracking-wider">
+                  Voltar para a Home
+                </Link>
+              </div>
+            );
+          })()}
         </div>
       </>
     );
@@ -120,6 +145,9 @@ export default function DynamicPage({
           {imageUrl && <meta name="twitter:image" content={imageUrl} key="twitter:image" />}
         </Head>
 
+        {/* Banner 728x90 below Header */}
+        <BannerAd formato="horizontal-lg" className="mb-6" />
+
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Main Content Column */}
           <article className="lg:col-span-8 flex flex-col gap-6">
@@ -153,52 +181,58 @@ export default function DynamicPage({
                 {noticia.subtitulo}
               </p>
 
-              {/* Social engagement details */}
-              <div className="flex flex-wrap items-center gap-y-2 gap-x-6 text-xs font-bold text-brand-gray border-t border-b border-gray-100 py-3 uppercase tracking-wider">
-                <span className="flex items-center gap-1">
-                  <Calendar className="w-3.5 h-3.5" />
-                  <span>Publicado {new Date(noticia.publicadoEm).toLocaleDateString('pt-BR')}</span>
-                </span>
+              {/* Social engagement & Audio Player Section */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 border-t border-b border-gray-100 py-4 uppercase tracking-wider">
+                {/* Column 1: Date & Share */}
+                <div className="flex flex-col gap-2 shrink-0">
+                  <span className="flex items-center gap-1.5 text-xs font-bold text-brand-gray">
+                    <Calendar className="w-3.5 h-3.5" />
+                    <span>Publicado {new Date(noticia.publicadoEm).toLocaleDateString('pt-BR')}</span>
+                  </span>
 
-                <button
-                  onClick={() => navigator.clipboard.writeText(window.location.href).then(() => alert('Link copiado!'))}
-                  className="flex items-center gap-1 hover:text-brand-yellow transition-colors cursor-pointer ml-auto"
-                >
-                  <Share2 className="w-3.5 h-3.5" />
-                  <span>Compartilhar</span>
-                </button>
+                  <button
+                    onClick={() => navigator.clipboard.writeText(window.location.href).then(() => alert('Link copiado!'))}
+                    className="flex items-center gap-1.5 text-xs font-black text-brand-gray hover:text-brand-yellow transition-colors cursor-pointer w-fit text-left"
+                  >
+                    <Share2 className="w-3.5 h-3.5" />
+                    <span>Compartilhar</span>
+                  </button>
+                </div>
+
+                {/* Column 2: Audio Player (if exists) */}
+                {noticia.audioUrl && (
+                  <div className="flex items-center gap-3 px-3.5 py-1.5 bg-brand-blue text-white rounded-full select-none max-w-fit shadow-2xs h-10">
+                    {/* Play/Pause Button */}
+                    <button
+                      onClick={handleAudioToggle}
+                      className="flex items-center gap-2 text-white hover:text-brand-yellow font-extrabold text-xs transition-colors cursor-pointer select-none shrink-0"
+                      aria-label={isCurrentlyPlaying ? 'Pausar áudio' : 'Ouvir notícia'}
+                    >
+                      {isCurrentlyPlaying ? (
+                        <>
+                          <Pause className="w-3.5 h-3.5 fill-white text-white" />
+                          <span className="normal-case">Pausar</span>
+                        </>
+                      ) : (
+                        <>
+                          <Play className="w-3.5 h-3.5 text-white fill-white/10" />
+                          <span className="normal-case">Ouvir notícia</span>
+                        </>
+                      )}
+                    </button>
+
+                    {/* Settings Icon */}
+                    <button 
+                      className="text-white/80 hover:text-brand-yellow transition-colors cursor-pointer shrink-0"
+                      title="Configurações de áudio"
+                      aria-label="Configurações"
+                    >
+                      <Settings className="w-4 h-4" />
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
-
-            {/* Listen report block */}
-            {noticia.audioUrl && (
-              <div className="bg-brand-blue/5 border border-brand-blue/10 p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-brand-blue text-white flex items-center justify-center shrink-0">
-                    <Play className="w-4 h-4 ml-0.5 fill-current" />
-                  </div>
-                  <div>
-                    <span className="text-2xs uppercase text-brand-gray font-bold tracking-widest block">REPORTAGEM EM ÁUDIO</span>
-                    <p className="font-extrabold text-xs sm:text-sm text-brand-blue">
-                      Ouça a matéria completa narrada pela redação.
-                    </p>
-                  </div>
-                </div>
-                <ButtonPrimary
-                  onClick={handleAudioToggle}
-                  icon={
-                    isCurrentlyPlaying ? (
-                      <Pause className="w-4 h-4 fill-current" />
-                    ) : (
-                      <Play className="w-4 h-4 fill-current ml-0.5" />
-                    )
-                  }
-                  className="shrink-0 w-full sm:w-auto"
-                >
-                  {isCurrentlyPlaying ? 'Pausar áudio' : 'Ouvir reportagem'}
-                </ButtonPrimary>
-              </div>
-            )}
 
             {/* Main Visual Image */}
             {imageUrl && (
@@ -318,6 +352,9 @@ export default function DynamicPage({
                 </div>
               </div>
             )}
+
+            {/* Banner 350x250 below all sidebar items */}
+            <BannerAd formato="retangulo-lg" className="mt-4" />
           </aside>
         </div>
       </>

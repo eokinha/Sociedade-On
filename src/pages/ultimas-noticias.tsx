@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { GetServerSideProps } from 'next';
 import { getItems } from '@/lib/directus';
 import { Noticia } from '@/types/noticia';
 import CardNoticia from '@/components/common/widgets/CardNoticia';
+import Paginacao from '@/components/common/widgets/Paginacao';
 import { ArrowLeft } from 'lucide-react';
 
 interface UltimasNoticiasPageProps {
@@ -12,6 +13,16 @@ interface UltimasNoticiasPageProps {
 }
 
 export default function UltimasNoticiasPage({ noticias }: UltimasNoticiasPageProps) {
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 15;
+  const totalPages = Math.ceil(noticias.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const paginatedNoticias = noticias.slice(startIndex, startIndex + itemsPerPage);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
   return (
     <>
       <Head>
@@ -42,11 +53,18 @@ export default function UltimasNoticiasPage({ noticias }: UltimasNoticiasPagePro
         </div>
 
         {/* News Grid */}
-        {noticias.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {noticias.map((item) => (
-              <CardNoticia key={item.id} noticia={item} layout="vertical" showExcerpt={true} />
-            ))}
+        {paginatedNoticias.length > 0 ? (
+          <div className="flex flex-col gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {paginatedNoticias.map((item) => (
+                <CardNoticia key={item.id} noticia={item} layout="vertical" showExcerpt={true} />
+              ))}
+            </div>
+            <Paginacao
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={handlePageChange}
+            />
           </div>
         ) : (
           <div className="bg-white p-12 text-center border border-gray-100 shadow-sm">
